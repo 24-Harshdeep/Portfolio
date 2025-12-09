@@ -16,8 +16,8 @@ export default function About() {
       </p>
 
       <div className="actions">
-        <a className="btn" href="/assets/Harshdeep_Kaur_Resume.pdf" download>
-          Download Resume
+        <a className="btn" href="https://resume123r.netlify.app/" target="_blank" rel="noreferrer">
+          Resume
         </a>
       </div>
     </section>

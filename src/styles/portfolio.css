@@ -698,6 +698,24 @@ p {
   line-height: 1.6;
 }
 
+/* Make the second-to-last certificate card smaller (compact variant) */
+.cert-grid .cert-card:nth-last-child(2) {
+  min-height: 120px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.cert-grid .cert-card:nth-last-child(2) h4 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+.cert-grid .cert-card:nth-last-child(2) .platform {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
 /* Make certificate links simple and readable */
 .cert-card {
   color: var(--text);
@@ -789,9 +807,15 @@ p {
 .contact-info {
   text-align: center;
   padding: 2rem;
-  background: var(--lavender-pale);
-  border-radius: var(--radius-sm);
-  margin-top: 2rem;
+  background: linear-gradient(180deg, rgba(181,126,220,0.06), rgba(246,241,250,0.6));
+  border-radius: 14px;
+  margin: 2rem auto;
+  max-width: 760px;
+  box-shadow: 0 8px 30px rgba(31, 41, 55, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .contact-info p {
@@ -812,6 +836,51 @@ p {
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s;
+}
+
+
+/* Centered lavender contact card (wider and stylish) */
+.contact-info.centered {
+  max-width: 560px; /* make the contact card a little wider */
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(180deg, rgba(181,126,220,0.12), rgba(246,241,250,0.6));
+  border: 1px solid rgba(181,126,220,0.14);
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(159,113,208,0.06);
+}
+
+.contact-info.centered p {
+  margin: 0.35rem 0;
+  font-size: 1.03rem;
+  color: var(--text);
+}
+
+.socials a {
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  background: rgba(181,126,220,0.08);
+  border: 1px solid rgba(181,126,220,0.12);
+}
+
+.contact-info.centered .socials { margin-top: 0.6rem; }
+.socials a:hover {
+  background: linear-gradient(90deg, var(--lavender), var(--lavender-light));
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* make resume button stand out in About */
+.about .actions .btn {
+  background: linear-gradient(135deg, var(--lavender), #9f71d0);
+  color: white;
+  padding: 0.9rem 1.6rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(159,113,208,0.16);
+  border: none;
+}
+.about .actions .btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(159,113,208,0.22);
 }
 
 .socials a:hover {
