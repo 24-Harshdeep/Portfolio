@@ -5,8 +5,8 @@ export default function Header() {
 
   return (
     <header className="site-header">
-      <div className="container header-inner">
-        <div className="brand">Harshdeep Kaur</div>
+      <div className="header-inner">
+        <div className="brand">Harshdeep</div>
 
         <button
           className="nav-toggle"
@@ -17,12 +17,12 @@ export default function Header() {
         </button>
 
         <nav className={`site-nav ${open ? 'open' : ''}`}>
-          <a href="#hero">Home</a>
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
-          <a href="#certifications">Certifications</a>
-          <a href="#contact">Contact</a>
+          <a href="#hero" onClick={() => setOpen(false)}>Home</a>
+          <a href="#about" onClick={() => setOpen(false)}>About</a>
+          <a href="#skills" onClick={() => setOpen(false)}>Skills</a>
+          <a href="#projects" onClick={() => setOpen(false)}>Projects</a>
+          <a href="#certifications" onClick={() => setOpen(false)}>Certifications</a>
+          <a href="#contact" onClick={() => setOpen(false)}>Contact</a>
         </nav>
       </div>
     </header>

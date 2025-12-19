@@ -6,7 +6,7 @@ export default function Education() {
       <h2>Education</h2>
       <div className="edu-list">
         <div className="edu-item">
-          <h3>BCA — Eternal University</h3>
+          <h3>BCA — [Your Institution]</h3>
           <p>
             Learning web development principles, software engineering basics,
             and practical projects in frontend technologies.
