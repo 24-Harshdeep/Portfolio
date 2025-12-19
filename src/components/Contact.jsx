@@ -13,6 +13,7 @@ export default function Contact() {
           <a href="#" target="_blank" rel="noreferrer" aria-label="Discord">Discord</a>
         </div>
       </div>
+      
 
       {/*
         Optional EmailJS usage (if you prefer JS-based sending):
