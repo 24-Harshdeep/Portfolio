@@ -710,6 +710,142 @@
   max-width: 700px;
 }
 
+/* GitHub Activity Section */
+.github-activity {
+  padding: 4rem 2rem;
+  background: var(--bg-surface);
+  text-align: center;
+  margin: 4rem 0;
+  border-radius: var(--radius-lg);
+}
+
+.activity-header {
+  margin-bottom: 2rem;
+}
+
+.activity-icon {
+  color: var(--blue-primary);
+  margin-bottom: 1rem;
+}
+
+.github-activity h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.activity-subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.activity-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.activity-toggle button {
+  background: var(--white);
+  color: var(--text-secondary);
+  border: 2px solid var(--border-gray);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.activity-toggle button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: var(--blue-primary);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+  z-index: 0;
+}
+
+.activity-toggle button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.activity-toggle button > * {
+  position: relative;
+  z-index: 1;
+}
+
+.activity-toggle button.active {
+  background: var(--blue-primary);
+  color: #fff;
+  border-color: var(--blue-primary);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
+  transform: translateY(-2px);
+}
+
+.activity-toggle button:hover {
+  border-color: var(--blue-primary);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.2);
+}
+
+.toggle-icon {
+  font-size: 1.2rem;
+  transition: transform var(--transition-base);
+}
+
+.activity-toggle button:hover .toggle-icon,
+.activity-toggle button.active .toggle-icon {
+  transform: scale(1.2);
+}
+
+.activity-visual {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.activity-visual img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-smooth);
+}
+
+.activity-visual img:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.dark-mode .github-activity {
+  background: var(--bg-surface);
+}
+
+.dark-mode .activity-toggle button {
+  background: var(--white);
+  border-color: var(--border-gray);
+}
+
+.dark-mode .activity-toggle button.active {
+  background: var(--blue-primary);
+  border-color: var(--blue-primary);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .command-palette {
@@ -737,6 +873,19 @@
   .tech-orbit-container {
     height: 300px;
   }
+
+  .activity-toggle {
+    gap: 0.5rem;
+  }
+
+  .activity-toggle button {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .github-activity {
+    padding: 3rem 1.5rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -746,5 +895,15 @@
 
   .github-stats-grid {
     grid-template-columns: 1fr;
+  }
+
+  .activity-toggle {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .activity-toggle button {
+    width: 100%;
+    justify-content: center;
   }
 }

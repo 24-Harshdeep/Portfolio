@@ -14,6 +14,7 @@ import Footer from './components/Footer'
 import CommandPalette from './components/CommandPalette'
 import ProjectModal from './components/ProjectModal'
 import GitHubStats from './components/GitHubStats'
+import GitHubActivity from './components/GitHubActivity'
 import PersonalityRhythm from './components/PersonalityRhythm'
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
         <PersonalityRhythm />
         <About />
         <GitHubStats />
+        <GitHubActivity />
         <SkillsEnhanced />
         <Projects />
         <GrowthJourney />
