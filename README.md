@@ -1,8 +1,54 @@
 # Harshdeep — Full Stack Developer Portfolio
 
-Professional, recruiter-friendly portfolio built with React (Vite) and Framer Motion.
+Professional, recruiter-friendly portfolio built with React (Vite), Framer Motion, and advanced interactive features.
 
-This repository contains a modern, corporate-style personal portfolio designed to showcase projects, skills, certifications, and an interactive contact form. It's optimized for internship applications, job outreach, and personal brand positioning.
+This repository contains a modern, corporate-style personal portfolio with cutting-edge UI/UX featuring dark mode, 3D graphics, interactive modals, command palette, and real-time GitHub stats. Optimized for internship applications, job outreach, and personal brand positioning.
+
+---
+
+## ✨ Advanced Features
+
+### 🎨 Visual Storytelling & Motion
+- **Microinteractions**: Hover effects, card tilts, button pulses using Framer Motion
+- **Scroll-based parallax**: Hero section with `useScroll` and `useTransform`
+- **Ambient gradient lighting**: Floating gradient background for futuristic feel
+- **Animated gradient text**: Flowing gradient animation on hero title
+
+### 🌓 Dark Mode
+- **Theme toggle**: Persistent dark/light mode with smooth transitions
+- **System-aware**: Respects user preferences and saves to localStorage
+
+### ⌨️ Command Palette
+- **Keyboard shortcut**: Press `Ctrl+K` (or `⌘K` on Mac) to open
+- **Quick navigation**: Jump to any section instantly
+- **Search functionality**: Filter commands by typing
+- **Arrow key navigation**: Navigate with keyboard for power users
+
+### 🚀 Dynamic Integrations
+- **GitHub Stats**: Real-time repository, star, follower, and fork counts via GitHub API
+- **Live data**: Automatically fetches and displays your latest activity
+- **Fallback data**: Gracefully handles API failures with placeholder stats
+
+### 🎭 Personality Rhythm
+- **Developer identity**: "I code, I learn, I design" section
+- **Animated icons**: Cycling through coding activities with motion
+- **Interactive cards**: Click or auto-cycle through your daily rhythm
+
+### 📊 Skills Visualization
+- **Dual view**: Toggle between progress bars and radar chart
+- **Recharts integration**: Professional data visualization
+- **Animated bars**: Skill bars fill dynamically on scroll
+
+### 🎬 Project Showcases
+- **Interactive modals**: Click project cards to open detailed case studies
+- **Image carousel**: Navigate through multiple project screenshots
+- **Hover overlays**: "View Case Study" appears on hover
+- **Rich metadata**: Timeline, role, team size, challenges, and solutions
+
+### 🌌 3D Tech Stack Orbit
+- **React Three Fiber**: Rotating 3D sphere with orbiting tech icons
+- **Interactive**: Mouse controls to rotate and explore
+- **Animated spheres**: Floating tech stack visualization
 
 ---
 
@@ -29,11 +75,16 @@ Deploy options: Vercel, Netlify, or GitHub Pages. See the `Deployment` section b
 
 ## Tech Stack
 
-- Frontend: React + Vite
-- Styling: plain CSS (corporate theme in `src/styles/corporate.css`)
-- Animations: Framer Motion
-- Form handling: Formspree (no backend required) — placeholder action in `src/components/Contact.jsx`
-- Build & Dev server: Vite
+- **Frontend**: React 19 + Vite 7
+- **Styling**: Plain CSS with CSS variables (corporate theme + enhanced features)
+- **Animations**: Framer Motion (scroll, transitions, micro-interactions)
+- **3D Graphics**: React Three Fiber + Drei
+- **Charts**: Recharts (radar charts, data visualization)
+- **State Management**: Zustand (dark mode, modal state, command palette)
+- **Icons**: React Icons (Feather icons)
+- **API Calls**: Axios (GitHub API integration)
+- **Form Handling**: Formspree (no backend required)
+- **Build & Dev**: Vite
 
 ---
 
@@ -48,6 +99,29 @@ portfolio/
 ├─ src/
 │  ├─ main.jsx
 │  ├─ App.jsx
+│  ├─ store/
+│  │  └─ useStore.js          # Zustand state (dark mode, modals, command palette)
+│  ├─ styles/
+│  │  ├─ corporate.css         # Base theme variables + layout
+│  │  └─ enhanced.css          # Advanced features styling
+│  ├─ assets/                  # Images (imageP.jpeg, image1.png, image4.png)
+│  └─ components/
+│     ├─ Header.jsx            # Nav with dark mode toggle & command palette trigger
+│     ├─ Hero.jsx              # Parallax hero with 3D orbit
+│     ├─ PersonalityRhythm.jsx # Developer rhythm section
+│     ├─ About.jsx
+│     ├─ GitHubStats.jsx       # Real-time GitHub API stats
+│     ├─ SkillsEnhanced.jsx    # Progress bars + radar chart toggle
+│     ├─ Projects.jsx          # Project cards with modal triggers
+│     ├─ ProjectModal.jsx      # Detailed case study modal
+│     ├─ GrowthJourney.jsx
+│     ├─ Certifications.jsx
+│     ├─ Contact.jsx
+│     ├─ Footer.jsx
+│     ├─ CommandPalette.jsx    # Ctrl+K quick navigation
+│     ├─ DarkModeToggle.jsx    # Theme switcher button
+│     └─ TechStackOrbit.jsx    # 3D rotating tech icons
+```
 │  ├─ styles/
 │  │  └─ corporate.css   # theme variables + layout
 │  ├─ assets/            # project images and profile image (imageP.jpeg, image1.png, image4.png)
@@ -103,10 +177,41 @@ Change fonts by editing the Google Fonts `link` in `index.html` and update `--fo
 - `Projects.jsx` — featured project cards (images: `src/assets/image1.png` & `src/assets/image4.png`)
 - `GrowthJourney.jsx` — timeline + animated counters
 - `Certifications.jsx` — certificate cards grid
-- `Contact.jsx` — Formspree-enabled contact form and social links
-- `Footer.jsx` — copyright and credits
+Each component uses small, focused CSS classes defined in `corporate.css` and `enhanced.css`. Animations are driven by Framer Motion.
 
-Each component uses small, focused CSS classes defined in `corporate.css`. Animations are driven by Framer Motion.
+---
+
+## 🎮 How to Use Advanced Features
+
+### Command Palette
+1. Press `Ctrl+K` (Windows/Linux) or `⌘K` (Mac)
+2. Type to search for commands or sections
+3. Use arrow keys to navigate, Enter to select
+4. Press Esc to close
+
+### Dark Mode
+- Click the sun/moon icon in the header
+- Your preference is saved to localStorage
+- Automatically applies on next visit
+
+### Project Modals
+- Click on any project card thumbnail
+- Or click "View Case Study" when hovering over project cards
+- Use carousel arrows to navigate multiple screenshots
+- Click outside or the X button to close
+
+### Skills Visualization
+- Click "Progress Bars" to see animated skill levels
+- Click "Radar Chart" to see a comparative visualization
+- Both views are interactive and responsive
+
+### GitHub Stats
+- Automatically fetches your real-time stats
+- Update the username in `src/components/GitHubStats.jsx`:
+  ```jsx
+  export default function GitHubStats({ username = 'YOUR_GITHUB_USERNAME' }) {
+  ```
+- Displays repositories, stars, followers, and forks
 
 ---
 
@@ -148,7 +253,14 @@ Alternative: EmailJS — use client-side JS to send via your email provider (req
 
 - Update `src/components/Projects.jsx` to change title, description, tech tags, live and GitHub links.
 - Replace the image import at the top of the file to use different screenshots.
-- If you add more projects, adjust the `.projects-grid` CSS if needed.
+- Add more project details for richer modals:
+  - `fullDescription`: Extended description for modal
+  - `images`: Array of image paths for carousel
+  - `timeline`: Project duration
+  - `role`: Your role in the project
+  - `team`: Team size or composition
+  - `features`: Array of key features
+  - `challenges`: Description of challenges and solutions
 
 Example project object in `Projects.jsx`:
 
@@ -156,7 +268,17 @@ Example project object in `Projects.jsx`:
 {
   title: 'ZaikaHub',
   desc: 'Short description...',
+  fullDescription: 'Detailed case study description...',
   tech: ['React','Node.js','MongoDB'],
+  timeline: '3 months (2024)',
+  role: 'Full Stack Developer',
+  team: 'Solo Project',
+  features: [
+    'Real-time search',
+    'User authentication',
+    'Responsive design'
+  ],
+  challenges: 'Implemented caching strategies...',
   liveUrl: 'https://example.com',
   githubUrl: 'https://github.com/your/repo',
   image: image1 // import at top: import image1 from '../assets/image1.png'
