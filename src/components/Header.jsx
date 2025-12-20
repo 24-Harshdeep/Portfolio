@@ -1,12 +1,26 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
+import DarkModeToggle from './DarkModeToggle'
+import { useStore } from '../store/useStore'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
+  const { setCommandPaletteOpen } = useStore()
 
   return (
-    <header className="site-header">
+    <motion.header 
+      className="site-header"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="header-inner">
-        <div className="brand">Harshdeep</div>
+        <motion.div 
+          className="brand"
+          whileHover={{ scale: 1.05 }}
+        >
+          Harshdeep
+        </motion.div>
 
         <button
           className="nav-toggle"
@@ -23,8 +37,19 @@ export default function Header() {
           <a href="#projects" onClick={() => setOpen(false)}>Projects</a>
           <a href="#certifications" onClick={() => setOpen(false)}>Certifications</a>
           <a href="#contact" onClick={() => setOpen(false)}>Contact</a>
+          
+          <div className="header-actions">
+            <button 
+              className="cmd-palette-trigger"
+              onClick={() => setCommandPaletteOpen(true)}
+              title="Command Palette (Ctrl+K)"
+            >
+              <span className="cmd-icon">⌘K</span>
+            </button>
+            <DarkModeToggle />
+          </div>
         </nav>
       </div>
-    </header>
+    </motion.header>
   )
 }
