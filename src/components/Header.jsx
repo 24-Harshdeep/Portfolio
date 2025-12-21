@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import DarkModeToggle from './DarkModeToggle'
-import logoImg from '../assets/image.jpeg'
 import { useStore } from '../store/useStore'
+import logoImg from '../assets/image.jpeg'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
