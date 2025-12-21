@@ -12,8 +12,8 @@ export default function Contact() {
     setError(null)
     setSuccess(false)
 
-    // Use Formspree endpoint (provided)
-    const endpoint = 'https://formspree.io/f/xykgjwoo'
+  // Use Formspree endpoint (provided)
+  const endpoint = 'https://formspree.io/f/xqezbwao'
 
     try {
       const form = e.currentTarget
@@ -70,7 +70,7 @@ export default function Contact() {
 
         <motion.form
           className="contact-form"
-          action="https://formspree.io/f/xykgjwoo"
+            action="https://formspree.io/f/xqezbwao"
           method="POST"
           onSubmit={handleSubmit}
           initial={{ opacity: 0 }}
