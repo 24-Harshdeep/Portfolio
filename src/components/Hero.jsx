@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import profileImage from '../assets/imageP.jpeg'
+import profileImage from '../assets/image.jpeg'
 
 export default function Hero() {
   const { scrollY } = useScroll()

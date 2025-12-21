@@ -104,7 +104,7 @@ portfolio/
 │  ├─ styles/
 │  │  ├─ corporate.css         # Base theme variables + layout
 │  │  └─ enhanced.css          # Advanced features styling
-│  ├─ assets/                  # Images (imageP.jpeg, image1.png, image4.png)
+│  ├─ assets/                  # Images (image.jpeg, image1.png, image4.png)
 │  └─ components/
 │     ├─ Header.jsx            # Nav with dark mode toggle & command palette trigger
 │     ├─ Hero.jsx              # Parallax hero with 3D orbit
@@ -124,7 +124,7 @@ portfolio/
 ```
 │  ├─ styles/
 │  │  └─ corporate.css   # theme variables + layout
-│  ├─ assets/            # project images and profile image (imageP.jpeg, image1.png, image4.png)
+│  ├─ assets/            # project images and profile image (image.jpeg, image1.png, image4.png)
 │  └─ components/
 │     ├─ Header.jsx
 │     ├─ Hero.jsx
