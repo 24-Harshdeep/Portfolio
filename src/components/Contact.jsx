@@ -128,7 +128,7 @@ export default function Contact() {
           <p>📍 Himachal Pradesh, India</p>
           <div className="socials">
             <a href="https://github.com/24-Harshdeep" target="_blank" rel="noreferrer">GitHub</a>
-            <a href="https://linkedin.com/in/harshdeep" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/harshdeep-kaur-58b5a4320/" target="_blank" rel="noreferrer">LinkedIn</a>
             <a href="https://discord.com/users/1274218545064185969" target="_blank" rel="noreferrer">Discord</a>
           </div>
         </motion.div>
