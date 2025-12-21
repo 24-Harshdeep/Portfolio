@@ -9,6 +9,7 @@ export default function GitHubActivity({ username = '24-Harshdeep' }) {
   const [langsError, setLangsError] = useState(false);
   const [graphError, setGraphError] = useState(false);
   const [streakError, setStreakError] = useState(false);
+  const [viewMode, setViewMode] = useState('graph'); // 'graph' or 'heatmap'
 
   // fallback URLs
   const ghchartFallback = `https://ghchart.rshah.org/${darkMode ? '7aa2f7' : '2563EB'}/${username}`;
@@ -82,8 +83,13 @@ export default function GitHubActivity({ username = '24-Harshdeep' }) {
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
         >
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem', marginBottom: '0.5rem' }}>
+            <button className="btn" onClick={() => setViewMode(viewMode === 'graph' ? 'heatmap' : 'graph')}>
+              {viewMode === 'graph' ? 'Show Heatmap' : 'Show Activity Graph'}
+            </button>
+          </div>
           <img
-            src={!graphError ? `https://github-readme-activity-graph.vercel.app/graph?username=${username}&bg_color=${
+            src={!graphError && viewMode === 'graph' ? `https://github-readme-activity-graph.vercel.app/graph?username=${username}&bg_color=${
               darkMode ? '1a1b26' : 'ffffff'
             }&color=${darkMode ? 'a9b1d6' : '2563eb'}&line=${
               darkMode ? '7aa2f7' : '2563eb'
@@ -91,6 +97,7 @@ export default function GitHubActivity({ username = '24-Harshdeep' }) {
             alt="GitHub Contribution Graph"
             loading="lazy"
             onError={() => setGraphError(true)}
+            onClick={() => setViewMode(viewMode === 'graph' ? 'heatmap' : 'graph')}
           />
           {graphError && (
             <div className="graph-error-note">Contribution graph failed to load — showing heatmap fallback.</div>

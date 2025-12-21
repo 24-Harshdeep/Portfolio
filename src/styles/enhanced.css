@@ -983,6 +983,20 @@
   color: rgba(255,255,255,0.8);
 }
 
+/* Small resume render area (hidden) */
+#resume-content {
+  background: white;
+  color: #0f172a;
+  padding: 24px;
+  font-family: var(--font-body);
+}
+
+/* Toggle button next to graph */
+.github-activity .btn {
+  padding: 0.5rem 0.9rem;
+  font-size: 0.9rem;
+}
+
 .visual-wrapper:hover {
   box-shadow: 0 25px 70px rgba(37, 99, 235, 0.15);
   transform: translateY(-4px);
