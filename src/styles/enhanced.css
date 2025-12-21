@@ -644,11 +644,24 @@
 
 .rhythm-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(6, 1fr);
   gap: 1.5rem;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
+}
+
+@media (max-width: 1200px) {
+  .rhythm-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .rhythm-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
 }
 
 .rhythm-card {
@@ -797,6 +810,10 @@
 .activity-icon {
   width: 40px;
   height: 40px;
+  color: var(--blue-primary);
+}
+
+.dark-mode .activity-icon {
   color: white;
 }
 

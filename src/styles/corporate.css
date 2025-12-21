@@ -702,10 +702,23 @@ p {
 
 .journey-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 2rem;
-  max-width: 1000px;
+  max-width: 1400px;
   margin: 4rem auto 0;
+}
+
+@media (max-width: 1200px) {
+  .journey-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .journey-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
 }
 
 .stat-card {
@@ -788,6 +801,22 @@ p {
   color: var(--text-secondary);
   font-size: 0.95rem;
   line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.cert-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--blue-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all var(--transition-smooth);
+}
+
+.cert-link:hover {
+  color: var(--blue-indigo);
+  transform: translateX(4px);
 }
 
 /* ===== CONTACT SECTION ===== */

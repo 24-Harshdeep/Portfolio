@@ -4,29 +4,40 @@ import { motion } from 'framer-motion'
 export default function Certifications() {
   const certs = [
     { 
-      name: 'Prompt Engineering', 
+      name: 'Prompt Engineering for ChatGPT', 
       platform: 'Coursera', 
-      note: 'Intro to prompt design and AI interaction patterns' 
+      url: 'https://www.coursera.org/account/accomplishments/records/XBMTKTPY0OW6',
+      note: 'Effective prompts for AI models like ChatGPT' 
     },
     { 
-      name: 'Git and GitHub', 
+      name: 'Introduction to Git and GitHub', 
       platform: 'Coursera', 
-      note: 'Version control workflows and collaboration' 
+      url: 'https://www.coursera.org/account/accomplishments/records/D9E238813HKD',
+      note: 'Certified in foundational Git skills, including version control management and collaboration' 
     },
     { 
-      name: 'MongoDB Learning Path', 
-      platform: 'MongoDB University', 
-      note: 'Basics of document databases and NoSQL' 
-    },
-    { 
-      name: 'React - The Complete Guide', 
-      platform: 'Udemy', 
-      note: 'Modern React with Hooks, Context, and Redux' 
-    },
-    { 
-      name: 'Node.js Backend Development', 
+      name: 'Version Control', 
       platform: 'Coursera', 
-      note: 'Server-side JavaScript and REST APIs' 
+      url: 'https://www.coursera.org/account/accomplishments/records/TW70H2NAMY2I',
+      note: 'Version control best practices and collaborative workflows' 
+    },
+    { 
+      name: 'Connecting to a MongoDB Database', 
+      platform: 'MongoDB Learning', 
+      url: 'https://learn.mongodb.com/c/_VQTpjFKRNSGqsOqvSOX3g',
+      note: 'MongoDB database connection fundamentals' 
+    },
+    { 
+      name: 'CRUD Operations: Insert and Find Documents', 
+      platform: 'MongoDB Learning', 
+      url: 'https://learn.mongodb.com/c/uyYeQapKTumGzcozYK7lGQ',
+      note: 'MongoDB document operations and queries' 
+    },
+    { 
+      name: 'Getting Started with MongoDB Atlas', 
+      platform: 'MongoDB Learning', 
+      url: 'https://learn.mongodb.com/c/oiMdaLxcTwGHll-piWyAhA',
+      note: 'Cloud database deployment and management' 
     },
   ]
 
@@ -59,6 +70,16 @@ export default function Certifications() {
               <h4>{cert.name}</h4>
               <p className="cert-platform">{cert.platform}</p>
               <p className="cert-note">{cert.note}</p>
+              {cert.url && (
+                <a 
+                  href={cert.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="cert-link"
+                >
+                  View Certificate →
+                </a>
+              )}
             </motion.div>
           ))}
         </div>

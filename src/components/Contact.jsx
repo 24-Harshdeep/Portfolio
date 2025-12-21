@@ -3,13 +3,52 @@ import { motion } from 'framer-motion'
 
 export default function Contact() {
   const [success, setSuccess] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
-  const handleSubmit = (e) => {
-    // Formspree will handle the actual submission
-    // Show success message after form submission
-    setTimeout(() => {
-      setSuccess(true)
-    }, 500)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+    setSuccess(false)
+
+    // Use Formspree endpoint (provided)
+    const endpoint = 'https://formspree.io/f/xykgjwoo'
+
+    try {
+      const form = e.currentTarget
+
+      // simple honeypot to catch bots
+      const gotcha = form.querySelector('input[name="_gotcha"]')
+      if (gotcha && gotcha.value) {
+        // silently ignore spam
+        setLoading(false)
+        return
+      }
+
+      const formData = new FormData(form)
+
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Accept: 'application/json',
+        },
+      })
+
+      if (res.ok) {
+        setSuccess(true)
+        form.reset()
+      } else {
+        const data = await res.json().catch(() => null)
+        setError((data && data.error) || 'Failed to send message')
+      }
+    } catch (err) {
+      console.error('Contact form error', err)
+      setError('An unexpected error occurred')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -31,7 +70,7 @@ export default function Contact() {
 
         <motion.form
           className="contact-form"
-          action="https://formspree.io/f/YOUR_FORM_ID"
+          action="https://formspree.io/f/xykgjwoo"
           method="POST"
           onSubmit={handleSubmit}
           initial={{ opacity: 0 }}
@@ -39,6 +78,12 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.6 }}
         >
+          {/* honeypot field - keep hidden from users */}
+          <input type="text" name="_gotcha" tabIndex="-1" style={{ display: 'none' }} />
+
+          {/* optional subject for Formspree */}
+          <input type="hidden" name="_subject" value="New contact message from portfolio" />
+
           <div className="form-group">
             <input type="text" name="name" placeholder=" " required />
             <label>Your Name</label>
@@ -54,11 +99,19 @@ export default function Contact() {
             <label>Your Message</label>
           </div>
 
-          <button className="btn btn-primary" type="submit">Send Message</button>
+          <button className="btn btn-primary" type="submit" disabled={loading}>
+            {loading ? 'Sending…' : 'Send Message'}
+          </button>
 
           {success && (
             <p className="form-success">
               ✅ Message sent! I'll get back to you soon.
+            </p>
+          )}
+
+          {error && (
+            <p className="form-error">
+              ❌ {error}
             </p>
           )}
         </motion.form>

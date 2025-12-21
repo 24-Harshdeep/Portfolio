@@ -9,11 +9,15 @@ export default function GitHubActivity({ username = '24-Harshdeep' }) {
   const [langsError, setLangsError] = useState(false);
   const [graphError, setGraphError] = useState(false);
   const [streakError, setStreakError] = useState(false);
-  const [viewMode, setViewMode] = useState('graph'); // 'graph' or 'heatmap'
+  const [viewMode, setViewMode] = useState('heatmap'); // 'graph' or 'heatmap' - default to heatmap since graph has 500 errors
 
-  // fallback URLs
-  const ghchartFallback = `https://ghchart.rshah.org/${darkMode ? '7aa2f7' : '2563EB'}/${username}`;
-  const readmeStatsBase = (path) => `https://github-readme-stats.vercel.app/${path}`;
+  // Use reliable ghchart as primary, with alternative backup
+  const heatmapUrl = `https://ghchart.rshah.org/${darkMode ? '7aa2f7' : '2563EB'}/${username}`;
+  const activityGraphUrl = `https://github-readme-activity-graph.vercel.app/graph?username=${username}&bg_color=${
+    darkMode ? '1a1b26' : 'ffffff'
+  }&color=${darkMode ? 'a9b1d6' : '2563eb'}&line=${
+    darkMode ? '7aa2f7' : '2563eb'
+  }&point=${darkMode ? '7dcfff' : '1e40af'}&area=true&hide_border=true`;
 
   return (
     <section className="github-activity">
@@ -29,102 +33,42 @@ export default function GitHubActivity({ username = '24-Harshdeep' }) {
         <h2>GitHub Activity</h2>
         <p className="activity-subtitle">My contribution journey and coding stats</p>
 
-        <div className="github-graphs-grid">
-          {/* GitHub Stats Card */}
-          <motion.div
-            className="graph-card"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            <img
-              src={!statsError ? `https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=${
-                darkMode ? 'tokyonight' : 'default'
-              }&hide_border=true&bg_color=${darkMode ? '1a1b26' : 'ffffff'}&title_color=${
-                darkMode ? '7aa2f7' : '2563eb'
-              }&icon_color=${darkMode ? '7dcfff' : '3b82f6'}&text_color=${
-                darkMode ? 'a9b1d6' : '374151'
-              }` : `${readmeStatsBase('api?username=' + username)}`}
-              alt="GitHub Stats"
-              loading="lazy"
-              onError={() => setStatsError(true)}
-            />
-            {statsError && <small className="graph-error">Stats image failed to load — live numbers below.</small>}
-          </motion.div>
-
-          {/* Top Languages Card */}
-          <motion.div
-            className="graph-card"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <img
-              src={!langsError ? `https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact&theme=${
-                darkMode ? 'tokyonight' : 'default'
-              }&hide_border=true&bg_color=${darkMode ? '1a1b26' : 'ffffff'}&title_color=${
-                darkMode ? '7aa2f7' : '2563eb'
-              }&text_color=${darkMode ? 'a9b1d6' : '374151'}` : `${readmeStatsBase('api/top-langs/?username=' + username + '&layout=compact')}`}
-              alt="Top Languages"
-              loading="lazy"
-              onError={() => setLangsError(true)}
-            />
-            {langsError && <small className="graph-error">Languages image failed to load.</small>}
-          </motion.div>
-        </div>
-
-        {/* Contribution Activity Graph */}
+        {/* Contribution Activity Graph with Toggle */}
         <motion.div
           className="activity-graph-full"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.1 }}
         >
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem', marginBottom: '0.5rem' }}>
-            <button className="btn" onClick={() => setViewMode(viewMode === 'graph' ? 'heatmap' : 'graph')}>
-              {viewMode === 'graph' ? 'Show Heatmap' : 'Show Activity Graph'}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+            <h3 style={{ margin: 0, fontSize: '1.25rem' }}>Contribution History</h3>
+            <button 
+              className="btn btn-sm" 
+              onClick={() => setViewMode(viewMode === 'graph' ? 'heatmap' : 'graph')}
+              style={{ padding: '0.5rem 1rem', fontSize: '0.875rem' }}
+            >
+              {viewMode === 'graph' ? '📊 Show Heatmap' : '📈 Show Activity Graph'}
             </button>
           </div>
-          <img
-            src={!graphError && viewMode === 'graph' ? `https://github-readme-activity-graph.vercel.app/graph?username=${username}&bg_color=${
-              darkMode ? '1a1b26' : 'ffffff'
-            }&color=${darkMode ? 'a9b1d6' : '2563eb'}&line=${
-              darkMode ? '7aa2f7' : '2563eb'
-            }&point=${darkMode ? '7dcfff' : '1e40af'}&area=true&hide_border=true` : ghchartFallback}
-            alt="GitHub Contribution Graph"
-            loading="lazy"
-            onError={() => setGraphError(true)}
-            onClick={() => setViewMode(viewMode === 'graph' ? 'heatmap' : 'graph')}
-          />
-          {graphError && (
-            <div className="graph-error-note">Contribution graph failed to load — showing heatmap fallback.</div>
-          )}
-        </motion.div>
-
-        {/* Streak Stats */}
-        <motion.div
-          className="streak-stats"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-        >
-          <img
-            src={!streakError ? `https://github-readme-streak-stats.herokuapp.com/?user=${username}&theme=${
-              darkMode ? 'tokyonight' : 'default'
-            }&hide_border=true&background=${darkMode ? '1a1b26' : 'ffffff'}&stroke=${
-              darkMode ? '7aa2f7' : '2563eb'
-            }&ring=${darkMode ? '7dcfff' : '3b82f6'}&fire=${darkMode ? 'f7768e' : 'ef4444'}&currStreakLabel=${
-              darkMode ? '7aa2f7' : '2563eb'
-            }` : `https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true`}
-            alt="GitHub Streak Stats"
-            loading="lazy"
-            onError={() => setStreakError(true)}
-          />
-          {streakError && <small className="graph-error">Streak image failed to load.</small>}
+          <div style={{ cursor: 'pointer' }} onClick={() => setViewMode(viewMode === 'graph' ? 'heatmap' : 'graph')}>
+            <img
+              src={viewMode === 'graph' ? activityGraphUrl : heatmapUrl}
+              alt={viewMode === 'graph' ? 'GitHub Activity Graph' : 'GitHub Contribution Heatmap'}
+              loading="lazy"
+              onError={(e) => {
+                console.warn('Graph load failed, switching to heatmap');
+                setViewMode('heatmap');
+                if (viewMode === 'heatmap') {
+                  e.target.style.display = 'none';
+                }
+              }}
+              style={{ width: '100%', borderRadius: '8px' }}
+            />
+          </div>
+          <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '0.875rem', marginTop: '0.5rem' }}>
+            Click image or button to toggle view
+          </p>
         </motion.div>
 
         <div className="activity-stats">

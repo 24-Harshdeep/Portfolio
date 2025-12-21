@@ -66,39 +66,16 @@ export default function Hero() {
             >
               Contact Me
             </motion.a>
-            <motion.button
+            <motion.a
               className="btn btn-secondary"
-              onClick={async () => {
-                // Generate a PDF from hidden resume content
-                const el = document.getElementById('resume-content');
-                if (!el) return;
-                // html2canvas is loaded via CDN in index.html
-                // jspdf is available at window.jspdf after loading
-                try {
-                  const canvas = await window.html2canvas(el, { scale: 2 });
-                  const imgData = canvas.toDataURL('image/png');
-                  const { jsPDF } = window.jspdf;
-                  const pdf = new jsPDF({ unit: 'px', format: [canvas.width, canvas.height] });
-                  pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
-                  pdf.save('Harshdeep_Kaur_Resume.pdf');
-                } catch (e) {
-                  console.error('PDF generation failed', e);
-                  // fallback: navigate to static file if present
-                  const fallbackHref = '/assets/Harshdeep_Kaur_Resume.pdf';
-                  const a = document.createElement('a');
-                  a.href = fallbackHref;
-                  a.download = 'Harshdeep_Kaur_Resume.pdf';
-                  document.body.appendChild(a);
-                  a.click();
-                  a.remove();
-                }
-              }}
+              href="/Resumeio.pdf"
+              download="Harshdeep_Kaur_Resume.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               title="Download Resume"
             >
-              Download Resume
-            </motion.button>
+              📄 Download Resume
+            </motion.a>
           </motion.div>
         </motion.div>
 

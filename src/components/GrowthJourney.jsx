@@ -47,10 +47,9 @@ const AnimatedCounter = ({ end, duration = 2000 }) => {
 
 export default function GrowthJourney() {
   const milestones = [
-    { year: '2022', label: 'Started coding basics' },
-    { year: '2023', label: 'Built first React app' },
-    { year: '2024', label: 'Full-stack project launch' },
-    { year: '2025', label: 'Internship + advanced learning' },
+    { year: '2023', label: 'Started BCA - Beginning my coding journey' },
+    { year: '2024', label: 'Built first React project & working HTML/CSS projects' },
+    { year: '2025', label: 'Full-stack development with MERN stack' },
   ]
 
   const stats = [
@@ -58,7 +57,7 @@ export default function GrowthJourney() {
     { icon: '🧩', number: 350, label: 'GitHub Commits', suffix: '+' },
     { icon: '🚀', number: 10, label: 'Technologies Learned' },
     { icon: '📈', number: 3, label: 'Years of Learning' },
-    { icon: '📚', number: 5, label: 'Certifications' },
+    { icon: '📚', number: 7, label: 'Certifications' },
   ]
 
   return (

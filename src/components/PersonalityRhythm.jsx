@@ -3,11 +3,11 @@ import { FiCode, FiBookOpen, FiCoffee, FiZap, FiTrendingUp, FiHeart } from 'reac
 import { useState, useEffect } from 'react';
 
 const rhythms = [
-  { icon: FiCode, label: 'Coding', color: '#2563EB', description: '60% of my day' },
-  { icon: FiBookOpen, label: 'Learning', color: '#7C3AED', description: 'Constantly evolving' },
-  { icon: FiCoffee, label: 'Debugging', color: '#DC2626', description: 'Late night sessions' },
-  { icon: FiZap, label: 'Building', color: '#F59E0B', description: 'Shipping features' },
-  { icon: FiTrendingUp, label: 'Growing', color: '#10B981', description: 'Every single day' },
+  { icon: FiCode, label: 'Coding', color: '#2563EB', description: '60% daily' },
+  { icon: FiBookOpen, label: 'Learning', color: '#7C3AED', description: 'Always evolving' },
+  { icon: FiCoffee, label: 'Debugging', color: '#DC2626', description: 'Late nights' },
+  { icon: FiZap, label: 'Building', color: '#F59E0B', description: 'Ship features' },
+  { icon: FiTrendingUp, label: 'Growing', color: '#10B981', description: 'Every day' },
   { icon: FiHeart, label: 'Creating', color: '#EC4899', description: 'With passion' },
 ];
 

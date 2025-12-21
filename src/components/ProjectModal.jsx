@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../store/useStore';
 import { FiX, FiGithub, FiExternalLink, FiCalendar, FiUsers, FiCode } from 'react-icons/fi';
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
 export default function ProjectModal() {
   const { selectedProject, setSelectedProject } = useStore();
@@ -19,9 +19,6 @@ export default function ProjectModal() {
     setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
   };
 
-  const closeModal = useCallback(() => setSelectedProject(null), [setSelectedProject]);
-  const setImageIndex = useCallback((i) => setCurrentImage(i), []);
-
   return (
     <AnimatePresence>
       {selectedProject && (
@@ -31,7 +28,7 @@ export default function ProjectModal() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={closeModal}
+            onClick={() => setSelectedProject(null)}
           />
           <motion.div
             className="project-modal"
@@ -42,7 +39,7 @@ export default function ProjectModal() {
           >
             <button
               className="modal-close"
-              onClick={closeModal}
+              onClick={() => setSelectedProject(null)}
               aria-label="Close modal"
             >
               <FiX size={24} />
@@ -50,7 +47,7 @@ export default function ProjectModal() {
 
             <div className="modal-content">
               <div className="modal-image-carousel">
-                <img src={images[currentImage]} alt={selectedProject.title} loading="lazy" />
+                <img src={images[currentImage]} alt={selectedProject.title} />
                 {images.length > 1 && (
                   <>
                     <button className="carousel-btn prev" onClick={prevImage}>
@@ -64,7 +61,7 @@ export default function ProjectModal() {
                         <button
                           key={idx}
                           className={`dot ${idx === currentImage ? 'active' : ''}`}
-                          onClick={() => setImageIndex(idx)}
+                          onClick={() => setCurrentImage(idx)}
                         />
                       ))}
                     </div>

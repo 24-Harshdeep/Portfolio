@@ -1,13 +1,12 @@
-import React, { useCallback, useMemo } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 import { useStore } from '../store/useStore'
 import image1 from '../assets/image1.png'
 import image4 from '../assets/image4.png'
 
-const ProjectCard = React.memo(({ title, desc, tech, liveUrl, githubUrl, image, project }) => {
+const ProjectCard = ({ title, desc, tech, liveUrl, githubUrl, image, project }) => {
   const { setSelectedProject } = useStore()
-  const handleOpen = useCallback(() => setSelectedProject(project), [project, setSelectedProject])
-
+  
   return (
     <motion.article 
       className="project-card"
@@ -19,11 +18,11 @@ const ProjectCard = React.memo(({ title, desc, tech, liveUrl, githubUrl, image, 
     >
       <motion.div 
         className="project-thumb"
-        onClick={handleOpen}
+        onClick={() => setSelectedProject(project)}
         whileHover={{ scale: 1.05 }}
         style={{ cursor: 'pointer' }}
       >
-        {image && <img src={image} alt={title} loading="lazy" />}
+        {image && <img src={image} alt={title} />}
         <div className="project-overlay">
           <span>View Case Study →</span>
         </div>
@@ -71,57 +70,53 @@ const ProjectCard = React.memo(({ title, desc, tech, liveUrl, githubUrl, image, 
       </div>
     </motion.article>
   )
-})
+}
 
-function Projects() {
-  const projects = useMemo(() => [
+export default function Projects() {
+  const projects = [
     {
       title: 'ZaikaHub',
-      desc: 'A full-stack recipe exploration platform built with React and Node.js. Features include recipe search, filtering, and user authentication.',
-      fullDescription: 'ZaikaHub is a comprehensive recipe platform that allows users to discover, save, and share their favorite recipes. Built with modern web technologies, it features real-time search, advanced filtering, user authentication, and a responsive design that works seamlessly across all devices.',
-      tech: ['React', 'Node.js', 'MongoDB', 'Express'],
-      liveUrl: '#',
-      githubUrl: '#',
+      desc: 'A modern food-ordering web app designed to offer smooth user interactions and responsive UI. Built with React and optimized for performance.',
+      fullDescription: 'ZaikaHub is a modern food-ordering web application that delivers a seamless and engaging user experience. Built with React, CSS, and Framer Motion, it focuses on smooth animations, intuitive navigation, and responsive design. The app is optimized for performance to ensure fast loading times and efficient interactions across all devices.',
+      tech: ['React', 'CSS', 'Framer Motion'],
+      liveUrl: 'https://zaikahubb.netlify.app/',
+      githubUrl: 'https://github.com/24-Harshdeep/Zaikahub',
       image: image1,
       images: [image1],
-      timeline: '3 months (2024)',
-      role: 'Full Stack Developer',
-      team: 'Solo Project',
-      features: [
-        'Real-time recipe search with debouncing',
-        'Advanced filtering by cuisine, dietary preferences',
-        'User authentication with JWT',
-        'Save and organize favorite recipes',
-        'Responsive design for mobile and desktop',
-      ],
-      challenges: 'Implemented efficient caching strategies to reduce API calls and improve performance. Designed a scalable MongoDB schema to handle complex recipe relationships.',
-    },
-    {
-      title: 'Adaptive Chatbot',
-      desc: 'An intelligent chatbot UI demonstrating theme support, conversational flows, and state management with React Context.',
-      fullDescription: 'An adaptive chatbot interface showcasing advanced UI patterns, theme switching capabilities, and sophisticated state management. Features include conversational memory, typing indicators, and smooth animations.',
-      tech: ['React', 'Context API', 'CSS', 'Framer Motion'],
-      liveUrl: '#',
-      githubUrl: '#',
-      image: image4,
-      images: [image4],
-      timeline: '1 month (2024)',
+      timeline: '2024',
       role: 'Frontend Developer',
       team: 'Solo Project',
       features: [
-        'Dynamic theme switching (light/dark)',
-        'Conversational memory and context',
-        'Typing indicators and smooth animations',
-        'Customizable chatbot personality',
-        'Export conversation history',
+        'Smooth user interactions with Framer Motion',
+        'Fully responsive UI optimized for all devices',
+        'Modern design with intuitive navigation',
+        'Performance-optimized for fast loading',
+        'Clean and maintainable React architecture',
       ],
-      challenges: 'Created a flexible state management system using Context API that handles complex conversation flows while maintaining performance.',
+      challenges: 'Implemented smooth animations without compromising performance. Designed a responsive layout that adapts seamlessly across different screen sizes and devices.',
     },
-  ], [])
-
-  const projectCards = useMemo(() => projects.map((project) => (
-    <ProjectCard key={project.title} {...project} project={project} />
-  )), [projects])
+    {
+      title: 'Adaptive Chatbot',
+      desc: 'An intelligent, adaptive chatbot built with a MERN stack that provides contextual and personalized responses using AI integration.',
+      fullDescription: 'A full-stack intelligent chatbot application built with the MERN stack (MongoDB, Express, React, Node.js) integrated with OpenAI API. The chatbot provides contextual, personalized responses and adapts to user interactions. Features include conversation memory, AI-powered responses, and a modern, responsive interface.',
+      tech: ['React', 'Node.js', 'Express', 'MongoDB', 'OpenAI API'],
+      liveUrl: 'https://chatbot-frontend-3f4it92se-24-harshdeeps-projects.vercel.app/',
+      githubUrl: 'https://github.com/24-Harshdeep/ChatBot-FullStack-',
+      image: image4,
+      images: [image4],
+      timeline: '2024',
+      role: 'Full Stack Developer',
+      team: 'Solo Project',
+      features: [
+        'AI-powered contextual responses with OpenAI integration',
+        'Conversation history and memory management',
+        'User authentication and session persistence',
+        'Real-time message streaming',
+        'Responsive chat interface with smooth animations',
+      ],
+      challenges: 'Integrated OpenAI API with efficient token management and response streaming. Built a scalable backend with MongoDB to handle conversation history and user sessions while maintaining low latency.',
+    },
+  ]
 
   return (
     <section id="projects" className="projects">
@@ -140,11 +135,11 @@ function Projects() {
         </p>
 
         <div className="projects-grid">
-          {projectCards}
+          {projects.map((project) => (
+            <ProjectCard key={project.title} {...project} project={project} />
+          ))}
         </div>
       </div>
     </section>
   )
 }
-
-export default React.memo(Projects)
