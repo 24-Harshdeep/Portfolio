@@ -129,7 +129,7 @@ export default function Contact() {
           <div className="socials">
             <a href="https://github.com/24-Harshdeep" target="_blank" rel="noreferrer">GitHub</a>
             <a href="https://linkedin.com/in/harshdeep" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="#" target="_blank" rel="noreferrer">Discord</a>
+            <a href="https://discord.com/users/1274218545064185969" target="_blank" rel="noreferrer">Discord</a>
           </div>
         </motion.div>
       </div>
