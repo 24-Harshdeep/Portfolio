@@ -19,7 +19,6 @@ export default function Header() {
           className="brand"
           whileHover={{ scale: 1.05 }}
         >
-          <img src="/assets/profile.svg" alt="logo" className="brand-logo" />
           <span className="brand-name">Harshdeep</span>
         </motion.div>
 
