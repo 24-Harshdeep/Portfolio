@@ -79,6 +79,7 @@ export default function Hero() {
             <motion.img 
               src={profileImage} 
               alt="Harshdeep Kaur"
+              loading="lazy"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             />

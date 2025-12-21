@@ -22,7 +22,7 @@ const ProjectCard = ({ title, desc, tech, liveUrl, githubUrl, image, project }) 
         whileHover={{ scale: 1.05 }}
         style={{ cursor: 'pointer' }}
       >
-        {image && <img src={image} alt={title} />}
+  {image && <img src={image} alt={title} loading="lazy" />}
         <div className="project-overlay">
           <span>View Case Study →</span>
         </div>

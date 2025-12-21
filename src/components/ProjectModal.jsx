@@ -47,7 +47,7 @@ export default function ProjectModal() {
 
             <div className="modal-content">
               <div className="modal-image-carousel">
-                <img src={images[currentImage]} alt={selectedProject.title} />
+                <img src={images[currentImage]} alt={selectedProject.title} loading="lazy" />
                 {images.length > 1 && (
                   <>
                     <button className="carousel-btn prev" onClick={prevImage}>

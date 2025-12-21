@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Suspense } from 'react'
 import './styles/corporate.css'
 import './styles/enhanced.css'
 import { useStore } from './store/useStore'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import About from './components/About'
-import SkillsEnhanced from './components/SkillsEnhanced'
-import Projects from './components/Projects'
+const SkillsEnhanced = React.lazy(() => import('./components/SkillsEnhanced'))
+const Projects = React.lazy(() => import('./components/Projects'))
 import GrowthJourney from './components/GrowthJourney'
 import Certifications from './components/Certifications'
 import Contact from './components/Contact'
@@ -14,7 +14,7 @@ import Footer from './components/Footer'
 import CommandPalette from './components/CommandPalette'
 import ProjectModal from './components/ProjectModal'
 import GitHubStats from './components/GitHubStats'
-import GitHubActivity from './components/GitHubActivity'
+const GitHubActivity = React.lazy(() => import('./components/GitHubActivity'))
 import PersonalityRhythm from './components/PersonalityRhythm'
 
 function App() {
@@ -38,9 +38,15 @@ function App() {
         <PersonalityRhythm />
         <About />
         <GitHubStats />
-        <GitHubActivity />
-        <SkillsEnhanced />
-        <Projects />
+        <Suspense fallback={<div className="skeleton">Loading activity...</div>}>
+          <GitHubActivity />
+        </Suspense>
+        <Suspense fallback={<div className="skeleton">Loading skills...</div>}>
+          <SkillsEnhanced />
+        </Suspense>
+        <Suspense fallback={<div className="skeleton">Loading projects...</div>}>
+          <Projects />
+        </Suspense>
         <GrowthJourney />
         <Certifications />
         <Contact />
