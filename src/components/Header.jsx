@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import DarkModeToggle from './DarkModeToggle'
 import { useStore } from '../store/useStore'
-import logoImg from '../assets/image.jpeg'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
@@ -20,7 +19,6 @@ export default function Header() {
           className="brand"
           whileHover={{ scale: 1.05 }}
         >
-          <img src={logoImg} alt="Harshdeep" className="brand-logo" />
           <span className="brand-name">Harshdeep</span>
         </motion.div>
 
