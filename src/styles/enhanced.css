@@ -712,138 +712,325 @@
 
 /* GitHub Activity Section */
 .github-activity {
-  padding: 4rem 2rem;
-  background: var(--bg-surface);
-  text-align: center;
-  margin: 4rem 0;
-  border-radius: var(--radius-lg);
-}
-
-.activity-header {
-  margin-bottom: 2rem;
-}
-
-.activity-icon {
-  color: var(--blue-primary);
-  margin-bottom: 1rem;
-}
-
-.github-activity h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.activity-subtitle {
-  color: var(--text-secondary);
-  font-size: 1rem;
-  margin-bottom: 2rem;
-}
-
-.activity-toggle {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-}
-
-.activity-toggle button {
-  background: var(--white);
-  color: var(--text-secondary);
-  border: 2px solid var(--border-gray);
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-lg);
-  cursor: pointer;
-  transition: all var(--transition-smooth);
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.95rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.activity-toggle button::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: var(--blue-primary);
-  transform: translate(-50%, -50%);
-  transition: width 0.4s ease, height 0.4s ease;
-  z-index: 0;
-}
-
-.activity-toggle button:hover::before {
-  width: 300px;
-  height: 300px;
-}
-
-.activity-toggle button > * {
-  position: relative;
-  z-index: 1;
-}
-
-.activity-toggle button.active {
-  background: var(--blue-primary);
-  color: #fff;
-  border-color: var(--blue-primary);
-  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
-  transform: translateY(-2px);
-}
-
-.activity-toggle button:hover {
-  border-color: var(--blue-primary);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.2);
-}
-
-.toggle-icon {
-  font-size: 1.2rem;
-  transition: transform var(--transition-base);
-}
-
-.activity-toggle button:hover .toggle-icon,
-.activity-toggle button.active .toggle-icon {
-  transform: scale(1.2);
-}
-
-.activity-visual {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-.activity-visual img {
-  width: 100%;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  transition: all var(--transition-smooth);
-}
-
-.activity-visual img:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-4px);
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, var(--bg-surface) 0%, white 100%);
 }
 
 .dark-mode .github-activity {
+  background: linear-gradient(135deg, #1a1b26 0%, #24283b 100%);
+}
+
+.github-activity h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.activity-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 3rem;
+  font-size: 1.1rem;
+}
+
+.header-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+}
+
+.header-icon-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  border-radius: 20px;
+  z-index: -1;
+  opacity: 0.3;
+  filter: blur(10px);
+}
+
+.dark-mode .header-icon-wrapper {
+  box-shadow: 0 10px 30px rgba(122, 162, 247, 0.3);
+}
+
+.activity-icon {
+  width: 40px;
+  height: 40px;
+  color: white;
+}
+
+/* GitHub Graphs Grid */
+.github-graphs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 3rem auto;
+  max-width: 1200px;
+}
+
+.graph-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark-mode .graph-card {
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.graph-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
+}
+
+.dark-mode .graph-card:hover {
+  box-shadow: 0 8px 30px rgba(122, 162, 247, 0.2);
+}
+
+.graph-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Full-width Activity Graph */
+.activity-graph-full {
+  margin: 3rem auto;
+  max-width: 1200px;
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.dark-mode .activity-graph-full {
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.activity-graph-full:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
+}
+
+.dark-mode .activity-graph-full:hover {
+  box-shadow: 0 8px 30px rgba(122, 162, 247, 0.2);
+}
+
+.activity-graph-full img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Streak Stats */
+.streak-stats {
+  margin: 3rem auto;
+  max-width: 800px;
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+}
+
+.dark-mode .streak-stats {
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.streak-stats:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
+}
+
+.dark-mode .streak-stats:hover {
+  box-shadow: 0 8px 30px rgba(122, 162, 247, 0.2);
+}
+
+.streak-stats img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.activity-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 4rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem;
+  background: var(--bg-surface);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.dark-mode .activity-stats {
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .stat-item {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.stat-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+}
+
+.dark-mode .stat-item:hover {
+  box-shadow: 0 8px 25px rgba(122, 162, 247, 0.2);
+}
+
+.stat-item h4 {
+  color: var(--primary-color);
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.dark-mode .stat-item h4 {
+  color: var(--accent-color);
+}
+
+.stat-item p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.visual-wrapper:hover {
+  box-shadow: 0 25px 70px rgba(37, 99, 235, 0.15);
+  transform: translateY(-4px);
+}
+
+.visual-wrapper img {
+  width: 100%;
+  display: block;
+  transition: transform var(--transition-smooth);
+}
+
+.visual-wrapper:hover img {
+  transform: scale(1.01);
+}
+
+.visual-overlay {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(37, 99, 235, 0.95);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.visual-wrapper:hover .visual-overlay {
+  opacity: 1;
+}
+
+.activity-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  transition: all var(--transition-base);
+}
+
+.stat-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.1);
+  background: linear-gradient(135deg, var(--blue-subtle), var(--bg-surface));
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--blue-primary);
+}
+
+.dark-mode .github-activity {
+  background: linear-gradient(135deg, var(--bg-surface) 0%, #1a1f2e 100%);
+}
+
+.dark-mode .activity-toggle {
   background: var(--bg-surface);
 }
 
-.dark-mode .activity-toggle button {
-  background: var(--white);
-  border-color: var(--border-gray);
+.dark-mode .visual-wrapper {
+  background: var(--bg-surface);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
-.dark-mode .activity-toggle button.active {
-  background: var(--blue-primary);
-  border-color: var(--blue-primary);
+.dark-mode .activity-stats {
+  background: var(--bg-surface);
+}
+
+.dark-mode .stat-item {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 /* Responsive */
@@ -874,17 +1061,38 @@
     height: 300px;
   }
 
-  .activity-toggle {
-    gap: 0.5rem;
-  }
-
-  .activity-toggle button {
-    padding: 0.6rem 1rem;
-    font-size: 0.85rem;
-  }
-
   .github-activity {
-    padding: 3rem 1.5rem;
+    padding: 4rem 1.5rem;
+  }
+
+  .github-activity h2 {
+    font-size: 2rem;
+  }
+
+  .github-graphs-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .activity-stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .header-icon-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+
+  .activity-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .activity-graph-full,
+  .streak-stats {
+    padding: 1rem;
   }
 }
 
@@ -897,13 +1105,25 @@
     grid-template-columns: 1fr;
   }
 
-  .activity-toggle {
-    flex-direction: column;
-    gap: 0.75rem;
+  .github-activity {
+    padding: 3rem 1rem;
   }
 
-  .activity-toggle button {
-    width: 100%;
-    justify-content: center;
+  .github-activity h2 {
+    font-size: 1.75rem;
+  }
+
+  .activity-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .stat-item {
+    padding: 1rem;
+  }
+
+  .graph-card,
+  .activity-graph-full,
+  .streak-stats {
+    padding: 0.75rem;
   }
 }

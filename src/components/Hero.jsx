@@ -1,7 +1,6 @@
 import React from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import profileImage from '../assets/imageP.jpeg'
-import TechStackOrbit from './TechStackOrbit'
 
 export default function Hero() {
   const { scrollY } = useScroll()
@@ -84,7 +83,6 @@ export default function Hero() {
               transition={{ duration: 0.3 }}
             />
           </div>
-          <TechStackOrbit />
         </motion.div>
       </motion.div>
     </section>
