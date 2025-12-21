@@ -963,6 +963,26 @@
   font-size: 0.95rem;
 }
 
+/* Small inline messages when graph images fail */
+.graph-error,
+.graph-error-note {
+  display: block;
+  margin-top: 0.6rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.graph-error-note {
+  color: var(--blue-primary);
+  font-weight: 600;
+}
+
+.dark-mode .graph-error,
+.dark-mode .graph-error-note {
+  color: rgba(255,255,255,0.8);
+}
+
 .visual-wrapper:hover {
   box-shadow: 0 25px 70px rgba(37, 99, 235, 0.15);
   transform: translateY(-4px);
