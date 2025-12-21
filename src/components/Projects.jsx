@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { useStore } from '../store/useStore'
 import image1 from '../assets/image1.png'
 import image4 from '../assets/image4.png'
 
-const ProjectCard = ({ title, desc, tech, liveUrl, githubUrl, image, project }) => {
+const ProjectCard = React.memo(({ title, desc, tech, liveUrl, githubUrl, image, project }) => {
   const { setSelectedProject } = useStore()
-  
+  const handleOpen = useCallback(() => setSelectedProject(project), [project, setSelectedProject])
+
   return (
     <motion.article 
       className="project-card"
@@ -18,11 +19,11 @@ const ProjectCard = ({ title, desc, tech, liveUrl, githubUrl, image, project }) 
     >
       <motion.div 
         className="project-thumb"
-        onClick={() => setSelectedProject(project)}
+        onClick={handleOpen}
         whileHover={{ scale: 1.05 }}
         style={{ cursor: 'pointer' }}
       >
-  {image && <img src={image} alt={title} loading="lazy" />}
+        {image && <img src={image} alt={title} loading="lazy" />}
         <div className="project-overlay">
           <span>View Case Study →</span>
         </div>
@@ -70,10 +71,10 @@ const ProjectCard = ({ title, desc, tech, liveUrl, githubUrl, image, project }) 
       </div>
     </motion.article>
   )
-}
+})
 
-export default function Projects() {
-  const projects = [
+function Projects() {
+  const projects = useMemo(() => [
     {
       title: 'ZaikaHub',
       desc: 'A full-stack recipe exploration platform built with React and Node.js. Features include recipe search, filtering, and user authentication.',
@@ -116,7 +117,11 @@ export default function Projects() {
       ],
       challenges: 'Created a flexible state management system using Context API that handles complex conversation flows while maintaining performance.',
     },
-  ]
+  ], [])
+
+  const projectCards = useMemo(() => projects.map((project) => (
+    <ProjectCard key={project.title} {...project} project={project} />
+  )), [projects])
 
   return (
     <section id="projects" className="projects">
@@ -135,11 +140,11 @@ export default function Projects() {
         </p>
 
         <div className="projects-grid">
-          {projects.map((project) => (
-            <ProjectCard key={project.title} {...project} project={project} />
-          ))}
+          {projectCards}
         </div>
       </div>
     </section>
   )
 }
+
+export default React.memo(Projects)

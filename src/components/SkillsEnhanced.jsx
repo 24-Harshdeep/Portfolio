@@ -130,7 +130,8 @@ export default function Skills() {
           <motion.div
             className="radar-chart-container"
             initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
             <ResponsiveContainer width="100%" height={400}>

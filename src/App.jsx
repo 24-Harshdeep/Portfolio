@@ -7,10 +7,10 @@ import Hero from './components/Hero'
 import About from './components/About'
 const SkillsEnhanced = React.lazy(() => import('./components/SkillsEnhanced'))
 const Projects = React.lazy(() => import('./components/Projects'))
-import GrowthJourney from './components/GrowthJourney'
-import Certifications from './components/Certifications'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
+const GrowthJourney = React.lazy(() => import('./components/GrowthJourney'))
+const Certifications = React.lazy(() => import('./components/Certifications'))
+const Contact = React.lazy(() => import('./components/Contact'))
+const Footer = React.lazy(() => import('./components/Footer'))
 import CommandPalette from './components/CommandPalette'
 import ProjectModal from './components/ProjectModal'
 import GitHubStats from './components/GitHubStats'
@@ -47,11 +47,19 @@ function App() {
         <Suspense fallback={<div className="skeleton">Loading projects...</div>}>
           <Projects />
         </Suspense>
-        <GrowthJourney />
-        <Certifications />
-        <Contact />
+        <Suspense fallback={<div className="skeleton">Loading journey...</div>}>
+          <GrowthJourney />
+        </Suspense>
+        <Suspense fallback={<div className="skeleton">Loading certifications...</div>}>
+          <Certifications />
+        </Suspense>
+        <Suspense fallback={<div className="skeleton">Loading contact...</div>}>
+          <Contact />
+        </Suspense>
       </main>
-      <Footer />
+      <Suspense fallback={<footer className="footer">Loading footer...</footer>}>
+        <Footer />
+      </Suspense>
     </div>
   )
 }

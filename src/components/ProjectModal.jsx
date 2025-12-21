@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../store/useStore';
 import { FiX, FiGithub, FiExternalLink, FiCalendar, FiUsers, FiCode } from 'react-icons/fi';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 export default function ProjectModal() {
   const { selectedProject, setSelectedProject } = useStore();
@@ -19,6 +19,9 @@ export default function ProjectModal() {
     setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
   };
 
+  const closeModal = useCallback(() => setSelectedProject(null), [setSelectedProject]);
+  const setImageIndex = useCallback((i) => setCurrentImage(i), []);
+
   return (
     <AnimatePresence>
       {selectedProject && (
@@ -28,7 +31,7 @@ export default function ProjectModal() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSelectedProject(null)}
+            onClick={closeModal}
           />
           <motion.div
             className="project-modal"
@@ -39,7 +42,7 @@ export default function ProjectModal() {
           >
             <button
               className="modal-close"
-              onClick={() => setSelectedProject(null)}
+              onClick={closeModal}
               aria-label="Close modal"
             >
               <FiX size={24} />
@@ -61,7 +64,7 @@ export default function ProjectModal() {
                         <button
                           key={idx}
                           className={`dot ${idx === currentImage ? 'active' : ''}`}
-                          onClick={() => setCurrentImage(idx)}
+                          onClick={() => setImageIndex(idx)}
                         />
                       ))}
                     </div>
