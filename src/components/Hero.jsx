@@ -66,6 +66,16 @@ export default function Hero() {
             >
               Contact Me
             </motion.a>
+            <motion.a
+              className="btn btn-secondary"
+              href="/assets/Harshdeep_Kaur_Resume.pdf"
+              download
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              title="Download Resume"
+            >
+              Download Resume
+            </motion.a>
           </motion.div>
         </motion.div>
 
@@ -79,7 +89,6 @@ export default function Hero() {
             <motion.img 
               src={profileImage} 
               alt="Harshdeep Kaur"
-              loading="lazy"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             />

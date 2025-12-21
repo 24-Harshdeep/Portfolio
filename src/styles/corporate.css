@@ -238,6 +238,32 @@ p {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   letter-spacing: -0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-logo {
+  width: 36px;
+  height: 36px;
+  display: inline-block;
+}
+
+.brand-name {
+  display: inline-block;
+}
+
+/* Secondary button used for resume download */
+.btn-secondary {
+  background: transparent;
+  border: 2px dashed var(--blue-primary);
+  color: var(--blue-primary);
+}
+
+.btn-secondary:hover {
+  background: var(--blue-primary);
+  color: var(--white);
+  transform: translateY(-3px);
 }
 
 .nav-toggle {
