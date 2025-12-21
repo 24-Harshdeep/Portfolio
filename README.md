@@ -232,7 +232,7 @@ Image optimization tip: run PNG/JPEG images through an optimizer (e.g., TinyPNG)
 By default the form action in `src/components/Contact.jsx` is set to a placeholder:
 
 ```html
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+<form action="https://formspree.io/f/xqezbwao" method="POST">
   ...
 </form>
 ```
