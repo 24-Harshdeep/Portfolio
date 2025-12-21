@@ -294,6 +294,17 @@
   margin-bottom: 0.75rem;
 }
 
+.github-stat-card .stat-icon,
+.github-stat-card svg {
+  /* ensure react-icons (inline svgs) inherit the color and are visible */
+  color: var(--blue-primary);
+  fill: currentColor;
+  width: 36px;
+  height: 36px;
+  display: block;
+  margin: 0 auto 0.75rem;
+}
+
 .github-stat-card .stat-value {
   font-size: 2rem;
   font-weight: 700;
@@ -306,6 +317,24 @@
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+/* Dark mode contrast for stat cards and icons */
+.dark-mode .github-stat-card {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.dark-mode .github-stat-card .stat-icon,
+.dark-mode .github-stat-card svg {
+  color: var(--accent-color);
+}
+
+/* Force a single-row 4-column layout on wide screens so stats remain on one row */
+@media (min-width: 1000px) {
+  .github-stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .github-stats.loading {
