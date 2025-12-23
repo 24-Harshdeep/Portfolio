@@ -131,7 +131,7 @@ export default function Contact() {
             <a href="https://www.linkedin.com/in/harshdeep-kaur-58b5a4320/" target="_blank" rel="noreferrer">LinkedIn</a>
             <a href="https://discord.com/users/1274218545064185969" target="_blank" rel="noreferrer">Discord</a>
             {/* Download CV (local file in /public) - does not require a server */}
-            <a href="/Resumeio.pdf" download="cv.pdf" className="btn btn-outline btn-download">
+            <a href="/cv.pdf" download="cv.pdf" className="btn btn-outline btn-download">
               📥 Download CV
             </a>
           </div>
