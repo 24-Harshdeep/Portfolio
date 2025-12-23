@@ -664,6 +664,40 @@
   }
 }
 
+/* Download CV button styling */
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  border: 1.5px solid var(--blue-primary);
+  color: var(--blue-primary);
+  background: transparent;
+  transition: all 180ms ease;
+}
+
+.btn-download:hover {
+  background: linear-gradient(90deg, rgba(37,99,235,0.08), rgba(79,70,229,0.06));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37,99,235,0.08);
+}
+
+.btn-download:active {
+  transform: translateY(0);
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-download {
+    border-color: rgba(255,255,255,0.14);
+    color: #fff;
+  }
+  .btn-download:hover {
+    background: rgba(255,255,255,0.04);
+  }
+}
+
 .rhythm-card {
   background: var(--white);
   border: 2px solid transparent;
