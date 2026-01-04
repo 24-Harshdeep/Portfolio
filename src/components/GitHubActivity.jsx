@@ -12,12 +12,14 @@ export default function GitHubActivity({ username = '24-Harshdeep' }) {
   const [viewMode, setViewMode] = useState('heatmap'); // 'graph' or 'heatmap' - default to heatmap since graph has 500 errors
 
   // Use reliable ghchart as primary, with alternative backup
-  const heatmapUrl = `https://ghchart.rshah.org/${darkMode ? '7aa2f7' : '2563EB'}/${username}`;
+  // Use blue for both heatmap squares and graph lines/points to match requested color
+  const heatmapColorHex = '2563EB';
+  const graphLineHex = '2563eb';
+  const graphPointHex = '1e40af';
+  const heatmapUrl = `https://ghchart.rshah.org/${heatmapColorHex}/${username}`;
   const activityGraphUrl = `https://github-readme-activity-graph.vercel.app/graph?username=${username}&bg_color=${
     darkMode ? '1a1b26' : 'ffffff'
-  }&color=${darkMode ? 'a9b1d6' : '2563eb'}&line=${
-    darkMode ? '7aa2f7' : '2563eb'
-  }&point=${darkMode ? '7dcfff' : '1e40af'}&area=true&hide_border=true`;
+  }&color=${graphLineHex}&line=${graphLineHex}&point=${graphPointHex}&area=true&hide_border=true`;
 
   return (
     <section className="github-activity">

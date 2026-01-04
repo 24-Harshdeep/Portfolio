@@ -800,10 +800,11 @@
   font-size: 2.5rem;
   margin-bottom: 1rem;
   text-align: center;
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #000000;
+}
+
+.dark-mode .github-activity h2 {
+  color: #ffffff;
 }
 
 .activity-subtitle {
@@ -844,7 +845,7 @@
 .activity-icon {
   width: 40px;
   height: 40px;
-  color: var(--blue-primary);
+  color: #000000;
 }
 
 .dark-mode .activity-icon {
