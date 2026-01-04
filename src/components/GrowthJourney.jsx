@@ -26,16 +26,18 @@ const AnimatedCounter = ({ end, duration = 2000 }) => {
   useEffect(() => {
     if (!hasStarted) return
 
+    const isFloat = Math.abs(end % 1) > Number.EPSILON
     const increment = end / (duration / 16)
     let current = 0
 
     const timer = setInterval(() => {
       current += increment
       if (current >= end) {
-        setCount(end)
+        setCount(isFloat ? Number(end).toFixed(1) : end)
         clearInterval(timer)
       } else {
-        setCount(Math.floor(current))
+        if (isFloat) setCount(Number(Math.min(current, end)).toFixed(1))
+        else setCount(Math.floor(current))
       }
     }, 16)
 
@@ -56,7 +58,7 @@ export default function GrowthJourney() {
     { icon: '💻', number: 5, label: 'Projects Completed' },
     { icon: '🧩', number: 350, label: 'GitHub Commits', suffix: '+' },
     { icon: '🚀', number: 10, label: 'Technologies Learned' },
-    { icon: '📈', number: 3, label: 'Years of Learning' },
+    { icon: '📈', number: 1.5, label: 'Years of Learning' },
     { icon: '📚', number: 7, label: 'Certifications' },
   ]
 
@@ -75,6 +77,7 @@ export default function GrowthJourney() {
         <p className="section-subtitle">
           Continuous learning and skill development over the years
         </p>
+        <p className="availability" style={{textAlign: 'center', fontWeight: 600, marginBottom: '1rem'}}>Available for internships</p>
 
         <motion.div 
           className="journey-timeline"
