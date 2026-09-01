@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion as Motion } from 'framer-motion'
 
 const SkillBar = ({ name, level }) => {
   const [width, setWidth] = useState(0)
@@ -23,7 +23,7 @@ const SkillBar = ({ name, level }) => {
 }
 
 const SkillCard = ({ title, skills }) => (
-  <motion.div 
+  <Motion.div 
     className="skill-card"
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -34,7 +34,7 @@ const SkillCard = ({ title, skills }) => (
     {skills.map((skill) => (
       <SkillBar key={skill.name} name={skill.name} level={skill.level} />
     ))}
-  </motion.div>
+  </Motion.div>
 )
 
 export default function Skills() {
@@ -75,7 +75,7 @@ export default function Skills() {
   return (
     <section id="skills" className="skills">
       <div className="container section-center">
-        <motion.h2 
+        <Motion.h2 
           className="section-title"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -83,7 +83,7 @@ export default function Skills() {
           transition={{ duration: 0.5 }}
         >
           Tech Stack & Skills
-        </motion.h2>
+        </Motion.h2>
 
         <div className="skills-grid">
           {skillCategories.map((category) => (

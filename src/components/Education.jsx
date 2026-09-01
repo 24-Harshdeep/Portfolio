@@ -6,10 +6,10 @@ export default function Education() {
       <h2>Education</h2>
       <div className="edu-list">
         <div className="edu-item">
-          <h3>BCA — [Your Institution]</h3>
+          <h3>Bachelor of Computer Applications</h3>
+          <p style={{ fontWeight: 600, color: 'var(--blue-primary)', margin: '0.25rem 0' }}>Eternal University | 2025 – 2027</p>
           <p>
-            Learning web development principles, software engineering basics,
-            and practical projects in frontend technologies.
+            Pursuing Computer Applications focusing on software engineering principles, full-stack web development, and database architecture.
           </p>
         </div>
       </div>

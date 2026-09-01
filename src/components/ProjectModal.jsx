@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion as Motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../store/useStore';
 import { FiX, FiGithub, FiExternalLink, FiCalendar, FiUsers, FiCode } from 'react-icons/fi';
 import { useState } from 'react';
@@ -22,19 +22,19 @@ export default function ProjectModal() {
   return (
     <AnimatePresence>
       {selectedProject && (
-        <>
-          <motion.div
+        <div className="modal-overlay-wrapper">
+          <Motion.div
             className="modal-backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedProject(null)}
           />
-          <motion.div
+          <Motion.div
             className="project-modal"
-            initial={{ opacity: 0, scale: 0.9, y: 50 }}
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 50 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           >
             <button
@@ -42,7 +42,7 @@ export default function ProjectModal() {
               onClick={() => setSelectedProject(null)}
               aria-label="Close modal"
             >
-              <FiX size={24} />
+              <FiX size={20} />
             </button>
 
             <div className="modal-content">
@@ -76,19 +76,19 @@ export default function ProjectModal() {
                 <div className="modal-meta">
                   {selectedProject.timeline && (
                     <div className="meta-item">
-                      <FiCalendar size={18} />
+                      <FiCalendar size={16} />
                       <span>{selectedProject.timeline}</span>
                     </div>
                   )}
                   {selectedProject.team && (
                     <div className="meta-item">
-                      <FiUsers size={18} />
+                      <FiUsers size={16} />
                       <span>{selectedProject.team}</span>
                     </div>
                   )}
                   {selectedProject.role && (
                     <div className="meta-item">
-                      <FiCode size={18} />
+                      <FiCode size={16} />
                       <span>{selectedProject.role}</span>
                     </div>
                   )}
@@ -129,9 +129,10 @@ export default function ProjectModal() {
                       href={selectedProject.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-primary"
+                      className="btn btn-primary btn-sm"
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
                     >
-                      <FiExternalLink size={18} />
+                      <FiExternalLink size={16} />
                       Live Demo
                     </a>
                   )}
@@ -140,17 +141,18 @@ export default function ProjectModal() {
                       href={selectedProject.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-secondary"
+                      className="btn btn-outline btn-sm"
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
                     >
-                      <FiGithub size={18} />
+                      <FiGithub size={16} />
                       Source Code
                     </a>
                   )}
                 </div>
               </div>
             </div>
-          </motion.div>
-        </>
+          </Motion.div>
+        </div>
       )}
     </AnimatePresence>
   );

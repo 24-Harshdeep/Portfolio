@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion as Motion } from 'framer-motion'
 
 export default function Contact() {
   const [success, setSuccess] = useState(false)
@@ -12,16 +12,13 @@ export default function Contact() {
     setError(null)
     setSuccess(false)
 
-  // Use Formspree endpoint (provided)
-  const endpoint = 'https://formspree.io/f/xqezbwao'
+    const endpoint = 'https://formspree.io/f/xqezbwao'
 
     try {
       const form = e.currentTarget
 
-      // simple honeypot to catch bots
       const gotcha = form.querySelector('input[name="_gotcha"]')
       if (gotcha && gotcha.value) {
-        // silently ignore spam
         setLoading(false)
         return
       }
@@ -54,7 +51,7 @@ export default function Contact() {
   return (
     <section id="contact" className="contact">
       <div className="contact-container">
-        <motion.div 
+        <Motion.div 
           className="contact-intro"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -66,11 +63,11 @@ export default function Contact() {
             I'm open to new opportunities, collaborations, or simply a good tech conversation. 
             Feel free to reach out through the form below.
           </p>
-        </motion.div>
+        </Motion.div>
 
-        <motion.form
+        <Motion.form
           className="contact-form"
-            action="https://formspree.io/f/xqezbwao"
+          action="https://formspree.io/f/xqezbwao"
           method="POST"
           onSubmit={handleSubmit}
           initial={{ opacity: 0 }}
@@ -78,10 +75,7 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.6 }}
         >
-          {/* honeypot field - keep hidden from users */}
           <input type="text" name="_gotcha" tabIndex="-1" style={{ display: 'none' }} />
-
-          {/* optional subject for Formspree */}
           <input type="hidden" name="_subject" value="New contact message from portfolio" />
 
           <div className="form-group">
@@ -114,28 +108,27 @@ export default function Contact() {
               ❌ {error}
             </p>
           )}
-        </motion.form>
+        </Motion.form>
 
-        <motion.div 
+        <Motion.div 
           className="contact-info"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.6 }}
         >
-          <p>📧 harshdeepkaur@gmail.com</p>
-          <p>📞 6003280603</p>
-          <p>📍 Himachal Pradesh, India</p>
+          <p>📧 harshdeepkaur1208@gmail.com</p>
+          <p>📞 +91 6003280603</p>
+          <p>📍 Assam, India</p>
           <div className="socials">
             <a href="https://github.com/24-Harshdeep" target="_blank" rel="noreferrer">GitHub</a>
             <a href="https://www.linkedin.com/in/harshdeep-kaur-58b5a4320/" target="_blank" rel="noreferrer">LinkedIn</a>
             <a href="https://discord.com/users/1274218545064185969" target="_blank" rel="noreferrer">Discord</a>
-            {/* Download CV (local file in /public) - does not require a server */}
-            <a href="/cv.pdf" download="cv.pdf" className="btn btn-outline btn-download">
-              📥 Download CV
+            <a href="/Harshdeep Resume.pdf" download="Harshdeep Resume.pdf" className="btn btn-outline btn-download">
+              📥 Download Resume
             </a>
           </div>
-        </motion.div>
+        </Motion.div>
       </div>
     </section>
   )

@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="footer-inner">
-        <p>© 2025 Harshdeep | Built with 💙 using React & Framer Motion</p>
+        <p>© 2026 Harshdeep Kaur | Built with 💙 using React & Framer Motion</p>
       </div>
     </footer>
   )

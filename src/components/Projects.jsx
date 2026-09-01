@@ -1,14 +1,15 @@
 import React from 'react'
-import { motion } from 'framer-motion'
+import { motion as Motion } from 'framer-motion'
 import { useStore } from '../store/useStore'
 import image1 from '../assets/image1.png'
 import image4 from '../assets/image4.png'
+import resumeAnalyzerImg from '../assets/resume_analyzer.png'
 
 const ProjectCard = ({ title, desc, tech, liveUrl, githubUrl, image, project }) => {
   const { setSelectedProject } = useStore()
   
   return (
-    <motion.article 
+    <Motion.article 
       className="project-card"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -16,7 +17,7 @@ const ProjectCard = ({ title, desc, tech, liveUrl, githubUrl, image, project }) 
       transition={{ duration: 0.5 }}
       whileHover={{ y: -8, boxShadow: '0 12px 32px rgba(37,99,235,0.15)' }}
     >
-      <motion.div 
+      <Motion.div 
         className="project-thumb"
         onClick={() => setSelectedProject(project)}
         whileHover={{ scale: 1.05 }}
@@ -24,26 +25,26 @@ const ProjectCard = ({ title, desc, tech, liveUrl, githubUrl, image, project }) 
       >
         {image && <img src={image} alt={title} />}
         <div className="project-overlay">
-          <span>View Case Study →</span>
+          <span>View Details →</span>
         </div>
-      </motion.div>
+      </Motion.div>
       <div className="project-body">
         <h3>{title}</h3>
         <p>{desc}</p>
         <div className="tech-tags">
           {tech.map((t) => (
-            <motion.span 
+            <Motion.span 
               key={t} 
               className="tech-tag"
               whileHover={{ scale: 1.1, backgroundColor: '#2563EB', color: '#fff' }}
             >
               {t}
-            </motion.span>
+            </Motion.span>
           ))}
         </div>
         <div className="project-actions">
           {liveUrl && (
-            <motion.a 
+            <Motion.a 
               className="btn btn-primary" 
               href={liveUrl} 
               target="_blank" 
@@ -52,10 +53,10 @@ const ProjectCard = ({ title, desc, tech, liveUrl, githubUrl, image, project }) 
               whileTap={{ scale: 0.95 }}
             >
               Live Demo
-            </motion.a>
+            </Motion.a>
           )}
           {githubUrl && (
-            <motion.a 
+            <Motion.a 
               className="btn btn-outline" 
               href={githubUrl} 
               target="_blank" 
@@ -64,11 +65,11 @@ const ProjectCard = ({ title, desc, tech, liveUrl, githubUrl, image, project }) 
               whileTap={{ scale: 0.95 }}
             >
               GitHub
-            </motion.a>
+            </Motion.a>
           )}
         </div>
       </div>
-    </motion.article>
+    </Motion.article>
   )
 }
 
@@ -76,9 +77,9 @@ export default function Projects() {
   const projects = [
     {
       title: 'ZaikaHub',
-      desc: 'A modern food-ordering web app designed to offer smooth user interactions and responsive UI. Built with React and optimized for performance.',
-      fullDescription: 'ZaikaHub is a modern food-ordering web application that delivers a seamless and engaging user experience. Built with React, CSS, and Framer Motion, it focuses on smooth animations, intuitive navigation, and responsive design. The app is optimized for performance to ensure fast loading times and efficient interactions across all devices.',
-      tech: ['React', 'CSS', 'Framer Motion'],
+      desc: 'Built a React-based recipe discovery platform with REST API integration and responsive Tailwind UI. Implemented React Router for seamless navigation.',
+      fullDescription: 'ZaikaHub is a React-based recipe discovery platform built with REST API integration and a responsive Tailwind CSS UI. It features React Router for seamless single-page navigation and smooth component interactions.',
+      tech: ['React', 'React Router', 'REST API', 'Tailwind CSS', 'Netlify'],
       liveUrl: 'https://zaikahubb.netlify.app/',
       githubUrl: 'https://github.com/24-Harshdeep/Zaikahub',
       image: image1,
@@ -87,20 +88,19 @@ export default function Projects() {
       role: 'Frontend Developer',
       team: 'Solo Project',
       features: [
-        'Smooth user interactions with Framer Motion',
-        'Fully responsive UI optimized for all devices',
-        'Modern design with intuitive navigation',
-        'Performance-optimized for fast loading',
-        'Clean and maintainable React architecture',
+        'Built a React-based recipe discovery platform with REST API integration',
+        'Responsive Tailwind CSS user interface',
+        'Implemented React Router for seamless navigation',
+        'Clean component structure and responsive layout',
       ],
-      challenges: 'Implemented smooth animations without compromising performance. Designed a responsive layout that adapts seamlessly across different screen sizes and devices.',
+      challenges: 'Integrated external recipe REST APIs seamlessly and optimized component re-renders for fast browsing.',
     },
     {
       title: 'Adaptive Chatbot',
-      desc: 'An intelligent, adaptive chatbot built with a MERN stack that provides contextual and personalized responses using AI integration.',
-      fullDescription: 'A full-stack intelligent chatbot application built with the MERN stack (MongoDB, Express, React, Node.js) integrated with OpenAI API. The chatbot provides contextual, personalized responses and adapts to user interactions. Features include conversation memory, AI-powered responses, and a modern, responsive interface.',
-      tech: ['React', 'Node.js', 'Express', 'MongoDB', 'OpenAI API'],
-      liveUrl: 'https://chatbot-frontend-3f4it92se-24-harshdeeps-projects.vercel.app/',
+      desc: 'Developed an AI-powered chatbot using React, Node.js, and Express.js with API integration for intelligent conversational responses. Built backend APIs to manage chat sessions and stored conversation data in MongoDB.',
+      fullDescription: 'Developed an AI-powered chatbot using React, Node.js, and Express.js with API integration for intelligent conversational responses. Built backend APIs to manage chat sessions and stored conversation data in MongoDB for persistent user interactions.',
+      tech: ['React', 'Node.js', 'Express.js', 'MongoDB'],
+      liveUrl: 'https://chat-bot-full-stack.vercel.app',
       githubUrl: 'https://github.com/24-Harshdeep/ChatBot-FullStack-',
       image: image4,
       images: [image4],
@@ -108,30 +108,49 @@ export default function Projects() {
       role: 'Full Stack Developer',
       team: 'Solo Project',
       features: [
-        'AI-powered contextual responses with OpenAI integration',
-        'Conversation history and memory management',
-        'User authentication and session persistence',
-        'Real-time message streaming',
-        'Responsive chat interface with smooth animations',
+        'AI-powered intelligent conversational responses',
+        'Backend APIs to manage chat sessions in Express.js',
+        'MongoDB database storage for persistent user interactions',
+        'Responsive React chat dashboard UI',
       ],
-      challenges: 'Integrated OpenAI API with efficient token management and response streaming. Built a scalable backend with MongoDB to handle conversation history and user sessions while maintaining low latency.',
+      challenges: 'Designed session management logic and MongoDB models for scalable conversation persistence.',
+    },
+    {
+      title: 'Resume Analyzer',
+      desc: 'Built an AI-powered resume analyzer that evaluates resume content and provides ATS-focused improvement suggestions. Developed an interactive dashboard with real-time feedback and a responsive interface.',
+      fullDescription: 'Built an AI-powered resume analyzer that evaluates resume content and provides ATS-focused improvement suggestions. Developed an interactive dashboard with real-time feedback and a responsive interface for an improved user experience.',
+      tech: ['React', 'Tailwind CSS', 'REST API'],
+      liveUrl: 'https://github.com/24-Harshdeep',
+      githubUrl: 'https://github.com/24-Harshdeep',
+      image: resumeAnalyzerImg,
+      images: [resumeAnalyzerImg],
+      timeline: '2026',
+      role: 'Full Stack Developer',
+      team: 'Solo Project',
+      features: [
+        'Evaluates resume content and provides ATS-focused improvement suggestions',
+        'Interactive dashboard with real-time feedback',
+        'Responsive Tailwind CSS user interface',
+        'REST API integration for analysis and suggestions',
+      ],
+      challenges: 'Crafted real-time evaluation response parsing and feedback cards layout for high readability.',
     },
   ]
 
   return (
     <section id="projects" className="projects">
       <div className="container section-center">
-        <motion.h2 
+        <Motion.h2 
           className="section-title gradient-text"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Featured Projects
-        </motion.h2>
+          Selected Projects
+        </Motion.h2>
         <p className="section-subtitle">
-          Building meaningful applications that solve real-world problems
+          Building scalable, user-focused web applications
         </p>
 
         <div className="projects-grid">

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 import { FiCode, FiBookOpen, FiCoffee, FiZap, FiTrendingUp, FiHeart } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
 
@@ -22,7 +22,7 @@ export default function PersonalityRhythm() {
   }, []);
 
   return (
-    <motion.div
+    <Motion.div
       className="personality-rhythm"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -38,7 +38,7 @@ export default function PersonalityRhythm() {
           const isActive = idx === activeIndex;
           
           return (
-            <motion.div
+            <Motion.div
               key={rhythm.label}
               className={`rhythm-card ${isActive ? 'active' : ''}`}
               initial={{ opacity: 0, scale: 0.8 }}
@@ -51,7 +51,7 @@ export default function PersonalityRhythm() {
                 borderColor: isActive ? rhythm.color : 'transparent',
               }}
             >
-              <motion.div
+              <Motion.div
                 className="rhythm-icon"
                 animate={{
                   scale: isActive ? [1, 1.2, 1] : 1,
@@ -61,15 +61,15 @@ export default function PersonalityRhythm() {
                 style={{ color: rhythm.color }}
               >
                 <Icon size={32} />
-              </motion.div>
+              </Motion.div>
               <h4>{rhythm.label}</h4>
               <p>{rhythm.description}</p>
-            </motion.div>
+            </Motion.div>
           );
         })}
       </div>
       
-      <motion.div
+      <Motion.div
         className="rhythm-indicator"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -82,7 +82,7 @@ export default function PersonalityRhythm() {
             onClick={() => setActiveIndex(idx)}
           />
         ))}
-      </motion.div>
-    </motion.div>
+      </Motion.div>
+    </Motion.div>
   );
 }

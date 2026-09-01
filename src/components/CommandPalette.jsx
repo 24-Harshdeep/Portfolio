@@ -1,6 +1,6 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion as Motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../store/useStore';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { FiGithub, FiLinkedin, FiMail, FiFileText, FiCode, FiAward, FiUser, FiX } from 'react-icons/fi';
 
 const commands = [
@@ -10,7 +10,7 @@ const commands = [
   { id: 'certs', label: 'Certifications', icon: FiAward, action: () => document.getElementById('certifications')?.scrollIntoView({ behavior: 'smooth' }) },
   { id: 'contact', label: 'Contact', icon: FiMail, action: () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }) },
   { id: 'github', label: 'GitHub Profile', icon: FiGithub, action: () => window.open('https://github.com/24-Harshdeep', '_blank') },
-  { id: 'linkedin', label: 'LinkedIn', icon: FiLinkedin, action: () => window.open('https://linkedin.com/in/harshdeep', '_blank') },
+  { id: 'linkedin', label: 'LinkedIn', icon: FiLinkedin, action: () => window.open('https://www.linkedin.com/in/harshdeep-kaur-58b5a4320/', '_blank') },
 ];
 
 export default function CommandPalette() {
@@ -22,56 +22,58 @@ export default function CommandPalette() {
     cmd.label.toLowerCase().includes(search.toLowerCase())
   );
 
+  const handleClose = useCallback(() => {
+    setCommandPaletteOpen(false);
+    setSearch('');
+    setSelected(0);
+  }, [setCommandPaletteOpen]);
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         setCommandPaletteOpen(!commandPaletteOpen);
+        if (commandPaletteOpen) {
+          setSearch('');
+          setSelected(0);
+        }
       }
       if (e.key === 'Escape') {
-        setCommandPaletteOpen(false);
+        handleClose();
       }
       if (commandPaletteOpen) {
         if (e.key === 'ArrowDown') {
           e.preventDefault();
-          setSelected((s) => (s + 1) % filteredCommands.length);
+          setSelected((s) => (s + 1) % (filteredCommands.length || 1));
         }
         if (e.key === 'ArrowUp') {
           e.preventDefault();
-          setSelected((s) => (s - 1 + filteredCommands.length) % filteredCommands.length);
+          setSelected((s) => (s - 1 + filteredCommands.length) % (filteredCommands.length || 1));
         }
         if (e.key === 'Enter' && filteredCommands[selected]) {
           e.preventDefault();
           filteredCommands[selected].action();
-          setCommandPaletteOpen(false);
-          setSearch('');
+          handleClose();
         }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [commandPaletteOpen, setCommandPaletteOpen, selected, filteredCommands]);
-
-  useEffect(() => {
-    if (!commandPaletteOpen) {
-      setSearch('');
-      setSelected(0);
-    }
-  }, [commandPaletteOpen]);
+  }, [commandPaletteOpen, setCommandPaletteOpen, selected, filteredCommands, handleClose]);
 
   return (
     <AnimatePresence>
       {commandPaletteOpen && (
         <>
-          <motion.div
+          <Motion.div
             className="command-palette-backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setCommandPaletteOpen(false)}
+            onClick={handleClose}
           />
-          <motion.div
+          <Motion.div
             className="command-palette"
             initial={{ opacity: 0, scale: 0.95, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -88,7 +90,7 @@ export default function CommandPalette() {
                 className="command-palette-input"
               />
               <button
-                onClick={() => setCommandPaletteOpen(false)}
+                onClick={handleClose}
                 className="command-palette-close"
                 aria-label="Close command palette"
               >
@@ -99,20 +101,19 @@ export default function CommandPalette() {
               {filteredCommands.map((cmd, idx) => {
                 const Icon = cmd.icon;
                 return (
-                  <motion.button
+                  <Motion.button
                     key={cmd.id}
                     className={`command-palette-item ${idx === selected ? 'selected' : ''}`}
                     onClick={() => {
                       cmd.action();
-                      setCommandPaletteOpen(false);
-                      setSearch('');
+                      handleClose();
                     }}
                     onMouseEnter={() => setSelected(idx)}
                     whileHover={{ x: 4 }}
                   >
                     <Icon size={18} />
                     <span>{cmd.label}</span>
-                  </motion.button>
+                  </Motion.button>
                 );
               })}
               {filteredCommands.length === 0 && (
@@ -122,7 +123,7 @@ export default function CommandPalette() {
             <div className="command-palette-footer">
               <kbd>↑↓</kbd> Navigate <kbd>↵</kbd> Select <kbd>Esc</kbd> Close
             </div>
-          </motion.div>
+          </Motion.div>
         </>
       )}
     </AnimatePresence>

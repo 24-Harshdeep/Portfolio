@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Tooltip } from 'recharts';
 
 const SkillBar = ({ name, level }) => {
@@ -11,7 +11,7 @@ const SkillBar = ({ name, level }) => {
   }, [level]);
 
   return (
-    <motion.div
+    <Motion.div
       className="skill-progress"
       initial={{ opacity: 0, x: -20 }}
       whileInView={{ opacity: 1, x: 0 }}
@@ -23,19 +23,19 @@ const SkillBar = ({ name, level }) => {
         <span className="skill-level">{level}%</span>
       </div>
       <div className="progress-bar">
-        <motion.div
+        <Motion.div
           className="progress-fill"
           initial={{ width: 0 }}
           animate={{ width: `${width}%` }}
           transition={{ duration: 1, ease: 'easeOut' }}
         />
       </div>
-    </motion.div>
+    </Motion.div>
   );
 };
 
 const SkillCard = ({ title, skills }) => (
-  <motion.div
+  <Motion.div
     className="skill-card"
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -47,7 +47,7 @@ const SkillCard = ({ title, skills }) => (
     {skills.map((skill) => (
       <SkillBar key={skill.name} name={skill.name} level={skill.level} />
     ))}
-  </motion.div>
+  </Motion.div>
 );
 
 export default function Skills() {
@@ -55,47 +55,52 @@ export default function Skills() {
 
   const skillCategories = [
     {
-      title: 'Frontend',
+      title: 'Languages & Frontend',
       skills: [
-        { name: 'React', level: 90 },
-        { name: 'JavaScript', level: 85 },
-        { name: 'HTML/CSS', level: 95 },
-        { name: 'TypeScript', level: 80 },
+        { name: 'React.js', level: 90 },
+        { name: 'JavaScript', level: 90 },
+        { name: 'Tailwind CSS', level: 85 },
+        { name: 'React Router', level: 85 },
+        { name: 'HTML5 & CSS3', level: 95 },
+        { name: 'Responsive Design', level: 90 },
       ],
     },
     {
-      title: 'Backend',
+      title: 'Backend & Databases',
       skills: [
         { name: 'Node.js', level: 85 },
-        { name: 'Python', level: 80 },
-        { name: 'MongoDB', level: 75 },
-        { name: 'SQL', level: 70 },
+        { name: 'Express.js', level: 85 },
+        { name: 'MongoDB', level: 80 },
+        { name: 'REST APIs', level: 90 },
+        { name: 'JWT', level: 80 },
+        { name: 'Python', level: 75 },
       ],
     },
     {
-      title: 'Tools & Others',
+      title: 'Tools & Deployment',
       skills: [
-        { name: 'Git', level: 90 },
-        { name: 'Docker', level: 70 },
-        { name: 'AWS', level: 65 },
-        { name: 'Figma', level: 75 },
+        { name: 'Git & GitHub', level: 90 },
+        { name: 'Postman', level: 85 },
+        { name: 'VS Code', level: 90 },
+        { name: 'Vercel', level: 85 },
+        { name: 'Netlify', level: 85 },
       ],
     },
   ];
 
   const radarData = [
     { subject: 'Frontend', value: 90 },
-    { subject: 'Backend', level: 80 },
-    { subject: 'Database', value: 75 },
-    { subject: 'DevOps', value: 68 },
-    { subject: 'Design', value: 75 },
-    { subject: 'Testing', value: 70 },
+    { subject: 'Backend', value: 85 },
+    { subject: 'Database', value: 80 },
+    { subject: 'REST APIs', value: 90 },
+    { subject: 'Languages', value: 85 },
+    { subject: 'Tools', value: 88 },
   ];
 
   return (
     <section id="skills" className="skills-section">
       <div className="container">
-        <motion.div
+        <Motion.div
           className="section-header"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -103,7 +108,7 @@ export default function Skills() {
         >
           <h2 className="gradient-text">Skills & Expertise</h2>
           <p className="section-subtitle">Technologies I work with daily</p>
-        </motion.div>
+        </Motion.div>
 
         <div className="skills-visualization-toggle">
           <button
@@ -127,7 +132,7 @@ export default function Skills() {
             ))}
           </div>
         ) : (
-          <motion.div
+          <Motion.div
             className="radar-chart-container"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -155,7 +160,7 @@ export default function Skills() {
                 />
               </RadarChart>
             </ResponsiveContainer>
-          </motion.div>
+          </Motion.div>
         )}
       </div>
     </section>

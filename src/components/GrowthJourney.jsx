@@ -1,112 +1,148 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { motion as Motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { FiExternalLink } from 'react-icons/fi'
 
-const AnimatedCounter = ({ end, duration = 2000 }) => {
+function AnimatedCounter({ end, duration = 2 }) {
   const [count, setCount] = useState(0)
-  const [hasStarted, setHasStarted] = useState(false)
-  const ref = useRef(null)
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasStarted) {
-          setHasStarted(true)
-        }
-      },
-      { threshold: 0.5 }
-    )
+    let startTime
+    let animationFrame
 
-    if (ref.current) {
-      observer.observe(ref.current)
+    const updateCount = (timestamp) => {
+      if (!startTime) startTime = timestamp
+      const progress = Math.min((timestamp - startTime) / (duration * 1000), 1)
+      setCount(Math.floor(progress * end))
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(updateCount)
+      }
     }
 
-    return () => observer.disconnect()
-  }, [hasStarted])
+    animationFrame = requestAnimationFrame(updateCount)
 
-  useEffect(() => {
-    if (!hasStarted) return
+    return () => cancelAnimationFrame(animationFrame)
+  }, [end, duration])
 
-    const isFloat = Math.abs(end % 1) > Number.EPSILON
-    const increment = end / (duration / 16)
-    let current = 0
-
-    const timer = setInterval(() => {
-      current += increment
-      if (current >= end) {
-        setCount(isFloat ? Number(end).toFixed(1) : end)
-        clearInterval(timer)
-      } else {
-        if (isFloat) setCount(Number(Math.min(current, end)).toFixed(1))
-        else setCount(Math.floor(current))
-      }
-    }, 16)
-
-    return () => clearInterval(timer)
-  }, [hasStarted, end, duration])
-
-  return <span ref={ref}>{count}</span>
+  return <span>{count}</span>
 }
 
 export default function GrowthJourney() {
-  const milestones = [
-    { year: '2023', label: 'Started BCA - Beginning my coding journey' },
-    { year: '2024', label: 'Built first React project & working HTML/CSS projects' },
-    { year: '2025', label: 'Full-stack development with MERN stack' },
+  const experiences = [
+    {
+      title: 'Full Stack Developer',
+      company: 'Axemata Modas',
+      period: 'July 2026 – Present',
+      type: 'Full-Time',
+      bullets: [
+        'Built scalable full-stack web applications using MERN stack & modern cloud architecture.',
+        'Engineered responsive UIs, optimized API endpoints, and integrated database schema designs.',
+      ],
+    },
+    {
+      title: 'Frontend Developer Intern',
+      company: 'Neximprove',
+      period: 'January 2026 – July 2026',
+      type: 'Professional Experience',
+      certificateUrl: 'https://drive.google.com/file/d/1573CNFDEyrAhnZKRcAMIuUUnu0Fe5pDC/view?usp=sharing',
+      bullets: [
+        'Built reusable React.js, TypeScript, and Tailwind CSS components with REST API integration.',
+        'Refactored components, fixed cross-browser issues, and collaborated in an Agile team.',
+      ],
+    },
+    {
+      title: 'Open Source Contributor',
+      company: 'GirlScript Summer of Code (GSSoC) 2026',
+      period: 'May 2026 – 15 August 2026',
+      type: 'Open Source Experience',
+      link: 'https://gssoc-tracker.vercel.app/pr-tracker/24-Harshdeep',
+      bullets: [
+        'Contributed to the CommitPulse project, focusing on frontend improvements.',
+        'Implemented frontend localization for multilingual support.',
+      ],
+    },
   ]
 
   const stats = [
-    { icon: '💻', number: 5, label: 'Projects Completed' },
-    { icon: '🧩', number: 350, label: 'GitHub Commits', suffix: '+' },
-    { icon: '🚀', number: 10, label: 'Technologies Learned' },
-    { icon: '📈', number: 1.5, label: 'Years of Learning' },
-    { icon: '📚', number: 7, label: 'Certifications' },
+    { icon: '💻', number: 3, label: 'Featured Projects' },
+    { icon: '🧩', number: 407, label: 'Year Contributions', suffix: '+' },
+    { icon: '🚀', number: 10, label: 'Technologies Mastered' },
+    { icon: '📈', number: 6, label: 'Months Experience', suffix: '+' },
+    { icon: '📚', number: 4, label: 'Certifications' },
   ]
 
   return (
     <section id="journey" className="growth-journey">
       <div className="container section-center">
-        <motion.h2 
+        <Motion.h2 
           className="section-title"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Growth Journey
-        </motion.h2>
+          Professional Experience & Growth
+        </Motion.h2>
         <p className="section-subtitle">
-          Continuous learning and skill development over the years
+          My career journey, open source contributions, and key achievements
         </p>
-        <p className="availability" style={{textAlign: 'center', fontWeight: 600, marginBottom: '1rem'}}>Available for internships</p>
 
-        <motion.div 
-          className="journey-timeline"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-        >
-          <div className="timeline-path">
-            {milestones.map((milestone, index) => (
-              <motion.div 
-                key={milestone.year} 
-                className="milestone"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-              >
-                <div className="milestone-dot" />
-                <div className="milestone-year">{milestone.year}</div>
-                <div className="milestone-label">{milestone.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+        <div className="experience-cards" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '900px', margin: '2.5rem auto' }}>
+          {experiences.map((exp, index) => (
+            <Motion.div
+              key={exp.company}
+              className="cert-card"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              style={{ textAlign: 'left', borderTop: '4px solid var(--blue-primary)' }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                <div>
+                  <h3 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--text-primary)' }}>{exp.title}</h3>
+                  <p style={{ margin: '0.25rem 0 0', fontWeight: 600, color: 'var(--blue-primary)' }}>{exp.company}</p>
+                </div>
+                <span className="tech-tag" style={{ fontSize: '0.85rem' }}>{exp.period}</span>
+              </div>
+              <ul style={{ margin: '0.75rem 0 0 1.25rem', padding: 0, color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>
+                {exp.bullets.map((bullet, idx) => (
+                  <li key={idx} style={{ marginBottom: '0.35rem' }}>{bullet}</li>
+                ))}
+              </ul>
+              {exp.certificateUrl && (
+                <div style={{ marginTop: '1rem' }}>
+                  <a
+                    href={exp.certificateUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-sm btn-outline"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', padding: '0.4rem 0.9rem' }}
+                  >
+                    View Internship Certificate <FiExternalLink size={14} />
+                  </a>
+                </div>
+              )}
+              {exp.link && (
+                <div style={{ marginTop: '1rem' }}>
+                  <a
+                    href={exp.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-sm btn-outline"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', padding: '0.4rem 0.9rem' }}
+                  >
+                    View GSSoC PR Tracker <FiExternalLink size={14} />
+                  </a>
+                </div>
+              )}
+            </Motion.div>
+          ))}
+        </div>
 
         <div className="journey-stats">
           {stats.map((stat, index) => (
-            <motion.div 
+            <Motion.div 
               key={stat.label} 
               className="stat-card"
               initial={{ opacity: 0, y: 30 }}
@@ -120,7 +156,7 @@ export default function GrowthJourney() {
                 {stat.suffix || ''}
               </div>
               <div className="stat-label">{stat.label}</div>
-            </motion.div>
+            </Motion.div>
           ))}
         </div>
       </div>

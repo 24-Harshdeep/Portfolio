@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion as Motion } from 'framer-motion'
 import DarkModeToggle from './DarkModeToggle'
 import { useStore } from '../store/useStore'
 
@@ -8,19 +8,19 @@ export default function Header() {
   const { setCommandPaletteOpen } = useStore()
 
   return (
-    <motion.header 
+    <Motion.header 
       className="site-header"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
       <div className="header-inner">
-        <motion.div 
+        <Motion.div 
           className="brand"
           whileHover={{ scale: 1.05 }}
         >
           <span className="brand-name">Harshdeep</span>
-        </motion.div>
+        </Motion.div>
 
         <button
           className="nav-toggle"
@@ -50,6 +50,6 @@ export default function Header() {
           </div>
         </nav>
       </div>
-    </motion.header>
+    </Motion.header>
   )
 }

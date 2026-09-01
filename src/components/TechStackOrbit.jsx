@@ -1,9 +1,8 @@
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Float, Text3D, Center } from '@react-three/drei';
+import { OrbitControls, Float, Center } from '@react-three/drei';
 import { useRef } from 'react';
-import * as THREE from 'three';
 
-function TechIcon({ position, color, label }) {
+function TechIcon({ position, color }) {
   const meshRef = useRef();
   
   useFrame((state) => {
@@ -35,7 +34,7 @@ function OrbitRing({ radius, icons }) {
         const angle = (idx / icons.length) * Math.PI * 2;
         const x = Math.cos(angle) * radius;
         const z = Math.sin(angle) * radius;
-        return <TechIcon key={idx} position={[x, 0, z]} color={icon.color} label={icon.label} />;
+        return <TechIcon key={idx} position={[x, 0, z]} color={icon.color} />;
       })}
     </group>
   );
