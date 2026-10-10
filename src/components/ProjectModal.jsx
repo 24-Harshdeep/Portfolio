@@ -1,159 +1,183 @@
-import { motion as Motion, AnimatePresence } from 'framer-motion';
-import { useStore } from '../store/useStore';
-import { FiX, FiGithub, FiExternalLink, FiCalendar, FiUsers, FiCode } from 'react-icons/fi';
-import { useState } from 'react';
+import React from 'react'
+import { useStore } from '../store/useStore'
+import { FiX, FiGithub, FiExternalLink, FiCalendar, FiUser, FiLayers } from 'react-icons/fi'
 
 export default function ProjectModal() {
-  const { selectedProject, setSelectedProject } = useStore();
-  const [currentImage, setCurrentImage] = useState(0);
+  const { selectedProject, setSelectedProject } = useStore()
 
-  if (!selectedProject) return null;
-
-  const images = selectedProject.images || [selectedProject.image];
-
-  const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % images.length);
-  };
-
-  const prevImage = () => {
-    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
-  };
+  if (!selectedProject) return null
 
   return (
-    <AnimatePresence>
-      {selectedProject && (
-        <div className="modal-overlay-wrapper">
-          <Motion.div
-            className="modal-backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedProject(null)}
-          />
-          <Motion.div
-            className="project-modal"
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          >
-            <button
-              className="modal-close"
-              onClick={() => setSelectedProject(null)}
-              aria-label="Close modal"
-            >
-              <FiX size={20} />
-            </button>
+    <div className="modal-backdrop" onClick={() => setSelectedProject(null)}>
+      <div
+        className="modal-content"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="case-study-title"
+      >
+        <button
+          className="modal-close"
+          onClick={() => setSelectedProject(null)}
+          aria-label="Close Case Study"
+        >
+          <FiX size={18} />
+        </button>
 
-            <div className="modal-content">
-              <div className="modal-image-carousel">
-                <img src={images[currentImage]} alt={selectedProject.title} />
-                {images.length > 1 && (
-                  <>
-                    <button className="carousel-btn prev" onClick={prevImage}>
-                      ‹
-                    </button>
-                    <button className="carousel-btn next" onClick={nextImage}>
-                      ›
-                    </button>
-                    <div className="carousel-dots">
-                      {images.map((_, idx) => (
-                        <button
-                          key={idx}
-                          className={`dot ${idx === currentImage ? 'active' : ''}`}
-                          onClick={() => setCurrentImage(idx)}
-                        />
-                      ))}
-                    </div>
-                  </>
-                )}
-              </div>
-
-              <div className="modal-info">
-                <h2>{selectedProject.title}</h2>
-                <p className="modal-description">{selectedProject.fullDescription || selectedProject.desc}</p>
-
-                <div className="modal-meta">
-                  {selectedProject.timeline && (
-                    <div className="meta-item">
-                      <FiCalendar size={16} />
-                      <span>{selectedProject.timeline}</span>
-                    </div>
-                  )}
-                  {selectedProject.team && (
-                    <div className="meta-item">
-                      <FiUsers size={16} />
-                      <span>{selectedProject.team}</span>
-                    </div>
-                  )}
-                  {selectedProject.role && (
-                    <div className="meta-item">
-                      <FiCode size={16} />
-                      <span>{selectedProject.role}</span>
-                    </div>
-                  )}
-                </div>
-
-                <div className="modal-tech">
-                  <h3>Tech Stack</h3>
-                  <div className="tech-tags">
-                    {selectedProject.tech.map((t) => (
-                      <span key={t} className="tech-tag">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {selectedProject.features && (
-                  <div className="modal-features">
-                    <h3>Key Features</h3>
-                    <ul>
-                      {selectedProject.features.map((feature, idx) => (
-                        <li key={idx}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {selectedProject.challenges && (
-                  <div className="modal-challenges">
-                    <h3>Challenges & Solutions</h3>
-                    <p>{selectedProject.challenges}</p>
-                  </div>
-                )}
-
-                <div className="modal-actions">
-                  {selectedProject.liveUrl && selectedProject.liveUrl !== '#' && (
-                    <a
-                      href={selectedProject.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-primary btn-sm"
-                      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
-                    >
-                      <FiExternalLink size={16} />
-                      Live Demo
-                    </a>
-                  )}
-                  {selectedProject.githubUrl && selectedProject.githubUrl !== '#' && (
-                    <a
-                      href={selectedProject.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-outline btn-sm"
-                      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
-                    >
-                      <FiGithub size={16} />
-                      Source Code
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
-          </Motion.div>
+        <span className="section-label" style={{ marginBottom: '0.25rem' }}>
+          ENGINEERING CASE STUDY
+        </span>
+        <h2 id="case-study-title" className="cs-title" style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>
+          {selectedProject.title}
+        </h2>
+        <div className="cs-tagline" style={{ fontSize: '1.05rem', marginBottom: '1.5rem' }}>
+          {selectedProject.tagline || selectedProject.desc}
         </div>
-      )}
-    </AnimatePresence>
-  );
+
+        <div
+          style={{
+            display: 'flex',
+            gap: '1.5rem',
+            flexWrap: 'wrap',
+            paddingBottom: '1.25rem',
+            marginBottom: '1.5rem',
+            borderBottom: '1px solid var(--border-color)',
+            fontSize: '0.875rem',
+            color: 'var(--text-secondary)',
+          }}
+        >
+          {selectedProject.role && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+              <FiUser style={{ color: 'var(--accent-blue)' }} />
+              <strong>Role:</strong> {selectedProject.role}
+            </div>
+          )}
+          {selectedProject.timeline && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+              <FiCalendar style={{ color: 'var(--accent-blue)' }} />
+              <strong>Timeline:</strong> {selectedProject.timeline}
+            </div>
+          )}
+        </div>
+
+        {/* Problem Section */}
+        {selectedProject.problem && (
+          <div style={{ marginBottom: '1.75rem' }}>
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+              The Problem & Scope
+            </h3>
+            <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+              {selectedProject.problem}
+            </p>
+          </div>
+        )}
+
+        {/* Architecture Diagram if available */}
+        {selectedProject.architecture && (
+          <div style={{ marginBottom: '1.75rem' }}>
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', color: 'var(--text-primary)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <FiLayers style={{ color: 'var(--accent-blue)' }} /> System Architecture
+            </h3>
+            <div className="architecture-diagram">{selectedProject.architecture}</div>
+          </div>
+        )}
+
+        {/* What I Built */}
+        {selectedProject.features && selectedProject.features.length > 0 && (
+          <div style={{ marginBottom: '1.75rem' }}>
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+              What I Built
+            </h3>
+            <ul className="exp-bullets">
+              {selectedProject.features.map((feat, idx) => (
+                <li key={idx}>{feat}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Technical Decisions */}
+        {selectedProject.decisions && (
+          <div style={{ marginBottom: '1.75rem' }}>
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+              Key Technical Decisions
+            </h3>
+            <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+              {selectedProject.decisions}
+            </p>
+          </div>
+        )}
+
+        {/* Challenges & Solutions */}
+        {selectedProject.challenges && (
+          <div style={{ marginBottom: '1.75rem' }}>
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+              Challenges & Lessons
+            </h3>
+            <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+              {selectedProject.challenges}
+            </p>
+          </div>
+        )}
+
+        {/* Tech Stack */}
+        <div style={{ marginBottom: '2rem' }}>
+          <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
+            Technologies Used
+          </h3>
+          <div className="cs-pills">
+            {selectedProject.tech.map((t) => (
+              <span key={t} className="tech-pill">
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Action Links */}
+        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+          {selectedProject.liveUrl && (
+            <a
+              href={selectedProject.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+            >
+              Live Project <FiExternalLink size={16} />
+            </a>
+          )}
+          {selectedProject.certificateUrl && (
+            <a
+              href={selectedProject.certificateUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline"
+            >
+              Certificate Link <FiExternalLink size={16} />
+            </a>
+          )}
+          {selectedProject.lorUrl && (
+            <a
+              href={selectedProject.lorUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline"
+            >
+              LOR Link <FiExternalLink size={16} />
+            </a>
+          )}
+          {selectedProject.githubUrl && (
+            <a
+              href={selectedProject.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline"
+            >
+              GitHub Code <FiGithub size={16} />
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  )
 }

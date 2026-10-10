@@ -1,55 +1,88 @@
 import React, { useState } from 'react'
-import { motion as Motion } from 'framer-motion'
+import { FiMenu, FiX, FiExternalLink } from 'react-icons/fi'
 import DarkModeToggle from './DarkModeToggle'
-import { useStore } from '../store/useStore'
 
 export default function Header() {
-  const [open, setOpen] = useState(false)
-  const { setCommandPaletteOpen } = useStore()
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  const navLinks = [
+    { name: 'Work', href: '#work' },
+    { name: 'GitHub', href: '#github' },
+    { name: 'About', href: '#about' },
+    { name: 'Experience', href: '#experience' },
+    { name: 'Journey', href: '#journey' },
+    { name: 'Contact', href: '#contact' },
+  ]
 
   return (
-    <Motion.header 
-      className="site-header"
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="header-inner">
-        <Motion.div 
-          className="brand"
-          whileHover={{ scale: 1.05 }}
-        >
-          <span className="brand-name">Harshdeep</span>
-        </Motion.div>
+    <header className="header-nav">
+      <div className="container nav-container">
+        <a href="#hero" className="brand-mark">
+          <span className="brand-dot" />
+          HARSHDEEP
+        </a>
 
-        <button
-          className="nav-toggle"
-          aria-label="Toggle menu"
-          onClick={() => setOpen(!open)}
-        >
-          <span className={`burger ${open ? 'open' : ''}`} />
-        </button>
+        <ul className="nav-links">
+          {navLinks.map((link) => (
+            <li key={link.name}>
+              <a href={link.href} className="nav-link">
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
 
-        <nav className={`site-nav ${open ? 'open' : ''}`}>
-          <a href="#hero" onClick={() => setOpen(false)}>Home</a>
-          <a href="#about" onClick={() => setOpen(false)}>About</a>
-          <a href="#skills" onClick={() => setOpen(false)}>Skills</a>
-          <a href="#projects" onClick={() => setOpen(false)}>Projects</a>
-          <a href="#certifications" onClick={() => setOpen(false)}>Certifications</a>
-          <a href="#contact" onClick={() => setOpen(false)}>Contact</a>
-          
-          <div className="header-actions">
-            <button 
-              className="cmd-palette-trigger"
-              onClick={() => setCommandPaletteOpen(true)}
-              title="Command Palette (Ctrl+K)"
+        <div className="nav-actions">
+          <DarkModeToggle />
+
+          <a
+            href="/Harshdeep_FullStackDeveloper_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-outline btn-sm"
+            style={{ padding: '0.45rem 1rem', fontSize: '0.85rem' }}
+          >
+            Resume <FiExternalLink size={13} />
+          </a>
+
+          <button
+            className="mobile-toggle"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle navigation menu"
+          >
+            {mobileOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {mobileOpen && (
+        <div className="mobile-drawer">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="mobile-drawer-link"
+              onClick={() => setMobileOpen(false)}
             >
-              <span className="cmd-icon">⌘K</span>
-            </button>
+              {link.name}
+            </a>
+          ))}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '1rem' }}>
+            <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Theme</span>
             <DarkModeToggle />
           </div>
-        </nav>
-      </div>
-    </Motion.header>
+          <a
+            href="/Harshdeep Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary"
+            style={{ marginTop: '0.75rem', width: '100%' }}
+            onClick={() => setMobileOpen(false)}
+          >
+            Resume ↗
+          </a>
+        </div>
+      )}
+    </header>
   )
 }

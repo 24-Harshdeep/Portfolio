@@ -1,66 +1,53 @@
 import React from 'react'
-import { motion as Motion } from 'framer-motion'
-import { FiTarget, FiCode } from 'react-icons/fi'
 
 export default function About() {
-  const highlights = [
-    'React.js', 'Node.js', 'Express.js', 'MongoDB', 'REST APIs', 'TypeScript', 'Tailwind CSS'
-  ]
+  const exploringTags = ['AI Agents & LLMs', 'Machine Learning', 'Full Stack Architecture', 'DSA & Algorithms', 'System Design', 'Cloud / Azure']
 
   return (
-    <section id="about" className="about">
-      <div className="container section-center">
-        <Motion.h2 
-          className="section-title"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          About Me
-        </Motion.h2>
-        <p className="section-subtitle">
-          Passionate Full-Stack Developer creating modern, scalable web applications
-        </p>
-        
-        <Motion.div 
-          className="about-card"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-        >
-          <div className="about-text-content">
-            <p className="about-lead">
-              Full-stack developer with <strong>6 months of frontend internship experience</strong> and active <strong>GSSoC 2026</strong> open-source contributions. Skilled in React, Node.js, Express.js, MongoDB, and REST APIs with experience building scalable web applications.
-            </p>
-            
-            <p className="about-subtext">
-              I focus on clean component architecture, seamless frontend/backend integration, performance optimization, and delivering high-quality user experiences.
-            </p>
+    <section id="about" className="about-section">
+      <div className="container">
+        <span className="section-label">Identity & Context</span>
+        <h2 className="section-title">About Me</h2>
 
-            <div className="about-highlights">
-              <span className="highlights-label">
-                <FiCode size={16} /> Core Tech Stack:
-              </span>
-              <div className="tech-tags" style={{ marginBottom: 0 }}>
-                {highlights.map((tech) => (
-                  <span key={tech} className="tech-tag">{tech}</span>
-                ))}
-              </div>
-            </div>
+        <div
+          style={{
+            backgroundColor: 'var(--bg-card)',
+            border: '1px solid var(--border-color)',
+            borderRadius: 'var(--radius-lg)',
+            padding: '2.5rem',
+            maxWidth: '900px',
+            margin: '0 auto',
+          }}
+        >
+          <p
+            style={{
+              fontSize: '1.15rem',
+              color: 'var(--text-primary)',
+              lineHeight: 1.7,
+              marginBottom: '1.5rem',
+              fontWeight: 500,
+            }}
+          >
+            I'm a 3rd-year BCA student (Eternal University), Full Stack Developer, and AI Engineer focused on building practical web products and intelligent AI applications. I've worked across frontend development, backend APIs, databases, AI agent workflows, and product architectures through real-world internships and open-source contributions. My recent work includes SaaS product development at Neximprove, a full-stack e-commerce architecture for Axemata Modas, GSSoC 2026 open-source contributions (Main & AI Track), and autonomous AI developer tools.
+          </p>
 
-            <div className="career-goal">
-              <div className="career-goal-header">
-                <FiTarget style={{ color: 'var(--blue-primary)' }} size={20} />
-                <h4>Career Goal</h4>
-              </div>
-              <p>
-                To design and develop digital products that simplify and empower user experiences through clean code, innovative UI/UX, and robust full-stack architecture.
-              </p>
+          <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '2rem' }}>
+            I enjoy transforming complex requirements into clean component architectures, robust API integrations, and intuitive user experiences.
+          </p>
+
+          <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1.5rem' }}>
+            <span className="section-label" style={{ fontSize: '0.75rem', marginBottom: '0.75rem' }}>
+              CURRENTLY EXPLORING & EXPANDING
+            </span>
+            <div className="cs-pills">
+              {exploringTags.map((tag) => (
+                <span key={tag} className="tech-pill">
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
-        </Motion.div>
+        </div>
       </div>
     </section>
   )

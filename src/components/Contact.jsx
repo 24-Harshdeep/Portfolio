@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { motion as Motion } from 'framer-motion'
+import { FiMail, FiLinkedin, FiGithub, FiFileText, FiSend } from 'react-icons/fi'
 
 export default function Contact() {
   const [success, setSuccess] = useState(false)
@@ -16,7 +16,6 @@ export default function Contact() {
 
     try {
       const form = e.currentTarget
-
       const gotcha = form.querySelector('input[name="_gotcha"]')
       if (gotcha && gotcha.value) {
         setLoading(false)
@@ -49,86 +48,136 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="contact">
-      <div className="contact-container">
-        <Motion.div 
-          className="contact-intro"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="section-title">Let's Connect</h2>
-          <p>
-            I'm open to new opportunities, collaborations, or simply a good tech conversation. 
-            Feel free to reach out through the form below.
+    <section id="contact" className="contact-section">
+      <div className="container">
+        <div className="contact-card">
+          <span className="section-label" style={{ marginBottom: '0.5rem' }}>
+            GET IN TOUCH
+          </span>
+          <h2 className="contact-title">Let's build something.</h2>
+          <p className="contact-sub">
+            I'm currently exploring Software Engineering, Full Stack Developer, and AI/ML Engineer opportunities.
           </p>
-        </Motion.div>
 
-        <Motion.form
-          className="contact-form"
-          action="https://formspree.io/f/xqezbwao"
-          method="POST"
-          onSubmit={handleSubmit}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-        >
-          <input type="text" name="_gotcha" tabIndex="-1" style={{ display: 'none' }} />
-          <input type="hidden" name="_subject" value="New contact message from portfolio" />
-
-          <div className="form-group">
-            <input type="text" name="name" placeholder=" " required />
-            <label>Your Name</label>
-          </div>
-
-          <div className="form-group">
-            <input type="email" name="email" placeholder=" " required />
-            <label>Your Email</label>
-          </div>
-
-          <div className="form-group">
-            <textarea name="message" rows="5" placeholder=" " required />
-            <label>Your Message</label>
-          </div>
-
-          <button className="btn btn-primary" type="submit" disabled={loading}>
-            {loading ? 'Sending…' : 'Send Message'}
-          </button>
-
-          {success && (
-            <p className="form-success">
-              ✅ Message sent! I'll get back to you soon.
-            </p>
-          )}
-
-          {error && (
-            <p className="form-error">
-              ❌ {error}
-            </p>
-          )}
-        </Motion.form>
-
-        <Motion.div 
-          className="contact-info"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-        >
-          <p>📧 harshdeepkaur1208@gmail.com</p>
-          <p>📞 +91 6003280603</p>
-          <p>📍 Assam, India</p>
-          <div className="socials">
-            <a href="https://github.com/24-Harshdeep" target="_blank" rel="noreferrer">GitHub</a>
-            <a href="https://www.linkedin.com/in/harshdeep-kaur-58b5a4320/" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="https://discord.com/users/1274218545064185969" target="_blank" rel="noreferrer">Discord</a>
-            <a href="/Harshdeep Resume.pdf" download="Harshdeep Resume.pdf" className="btn btn-outline btn-download">
-              📥 Download Resume
+          <div className="contact-links-grid">
+            <a href="mailto:harshdeepkaur1208@gmail.com" className="btn btn-outline">
+              <FiMail size={16} /> Email Me →
+            </a>
+            <a
+              href="https://www.linkedin.com/in/harshdeep-kaur-58b5a4320/"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline"
+            >
+              <FiLinkedin size={16} /> LinkedIn →
+            </a>
+            <a
+              href="https://github.com/24-Harshdeep"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-outline"
+            >
+              <FiGithub size={16} /> GitHub →
+            </a>
+            <a
+              href="/Harshdeep_FullStackDeveloper_Resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-primary"
+            >
+              <FiFileText size={16} /> Resume ↗
             </a>
           </div>
-        </Motion.div>
+
+          <form
+            action="https://formspree.io/f/xqezbwao"
+            method="POST"
+            onSubmit={handleSubmit}
+            style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'left' }}
+          >
+            <input type="text" name="_gotcha" tabIndex="-1" style={{ display: 'none' }} />
+            <input type="hidden" name="_subject" value="New portfolio inquiry" />
+
+            <div style={{ marginBottom: '1.25rem' }}>
+              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
+                Your Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                required
+                placeholder="Jane Doe"
+                style={{
+                  width: '100%',
+                  padding: '0.75rem 1rem',
+                  backgroundColor: 'var(--bg-main)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: 'var(--radius-sm)',
+                  color: 'var(--text-primary)',
+                  fontFamily: 'var(--font-body)',
+                }}
+              />
+            </div>
+
+            <div style={{ marginBottom: '1.25rem' }}>
+              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
+                Your Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="jane@example.com"
+                style={{
+                  width: '100%',
+                  padding: '0.75rem 1rem',
+                  backgroundColor: 'var(--bg-main)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: 'var(--radius-sm)',
+                  color: 'var(--text-primary)',
+                  fontFamily: 'var(--font-body)',
+                }}
+              />
+            </div>
+
+            <div style={{ marginBottom: '1.5rem' }}>
+              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
+                Message
+              </label>
+              <textarea
+                name="message"
+                rows="4"
+                required
+                placeholder="Hi Harshdeep, I would love to talk about..."
+                style={{
+                  width: '100%',
+                  padding: '0.75rem 1rem',
+                  backgroundColor: 'var(--bg-main)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: 'var(--radius-sm)',
+                  color: 'var(--text-primary)',
+                  fontFamily: 'var(--font-body)',
+                }}
+              />
+            </div>
+
+            <button type="submit" className="btn btn-primary" style={{ width: '100%' }} disabled={loading}>
+              {loading ? 'Sending...' : 'Send Direct Message'} <FiSend size={15} />
+            </button>
+
+            {success && (
+              <p style={{ marginTop: '1rem', color: 'var(--accent-green)', fontSize: '0.9rem' }}>
+                ✓ Message sent successfully! I will get back to you shortly.
+              </p>
+            )}
+
+            {error && (
+              <p style={{ marginTop: '1rem', color: '#f87171', fontSize: '0.9rem' }}>
+                ✕ {error}
+              </p>
+            )}
+          </form>
+        </div>
       </div>
     </section>
   )

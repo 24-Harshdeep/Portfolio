@@ -4,7 +4,7 @@ import { persist } from 'zustand/middleware';
 export const useStore = create(
   persist(
     (set) => ({
-      darkMode: false,
+      darkMode: true,
       toggleDarkMode: () => set((state) => ({ darkMode: !state.darkMode })),
       
       commandPaletteOpen: false,

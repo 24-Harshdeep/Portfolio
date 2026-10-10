@@ -1,45 +1,52 @@
 import React, { useEffect } from 'react'
-import './styles/corporate.css'
-import './styles/enhanced.css'
 import { useStore } from './store/useStore'
+import './styles/portfolio.css'
+
+import SignatureIntro from './components/SignatureIntro'
+import CustomCursor from './components/CustomCursor'
 import Header from './components/Header'
 import Hero from './components/Hero'
-import About from './components/About'
-import SkillsEnhanced from './components/SkillsEnhanced'
+import ProofStrip from './components/ProofStrip'
 import Projects from './components/Projects'
+import GitHubActivity from './components/GitHubActivity'
+import SkillsEnhanced from './components/SkillsEnhanced'
+import BeyondProjects from './components/BeyondProjects'
 import GrowthJourney from './components/GrowthJourney'
+import About from './components/About'
 import Certifications from './components/Certifications'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import CommandPalette from './components/CommandPalette'
 import ProjectModal from './components/ProjectModal'
-import GitHubActivity from './components/GitHubActivity'
-import PersonalityRhythm from './components/PersonalityRhythm'
 
 function App() {
   const { darkMode } = useStore()
 
   useEffect(() => {
     if (darkMode) {
-      document.documentElement.classList.add('dark-mode')
+      document.documentElement.classList.add('dark')
+      document.documentElement.classList.remove('light')
     } else {
-      document.documentElement.classList.remove('dark-mode')
+      document.documentElement.classList.add('light')
+      document.documentElement.classList.remove('dark')
     }
   }, [darkMode])
 
   return (
     <div className="portfolio-root">
-      <CommandPalette />
+      <SignatureIntro />
+      <CustomCursor />
       <ProjectModal />
+
       <Header />
       <main>
         <Hero />
-        <PersonalityRhythm />
-  <About />
-  <GitHubActivity />
-        <SkillsEnhanced />
+        <ProofStrip />
         <Projects />
+        <GitHubActivity />
+        <SkillsEnhanced />
+        <BeyondProjects />
         <GrowthJourney />
+        <About />
         <Certifications />
         <Contact />
       </main>

@@ -1,162 +1,85 @@
-import { motion as Motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import { FiExternalLink } from 'react-icons/fi'
-
-function AnimatedCounter({ end, duration = 2 }) {
-  const [count, setCount] = useState(0)
-
-  useEffect(() => {
-    let startTime
-    let animationFrame
-
-    const updateCount = (timestamp) => {
-      if (!startTime) startTime = timestamp
-      const progress = Math.min((timestamp - startTime) / (duration * 1000), 1)
-      setCount(Math.floor(progress * end))
-
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(updateCount)
-      }
-    }
-
-    animationFrame = requestAnimationFrame(updateCount)
-
-    return () => cancelAnimationFrame(animationFrame)
-  }, [end, duration])
-
-  return <span>{count}</span>
-}
+import React, { useRef } from 'react'
+import { motion, useScroll, useSpring } from 'framer-motion'
 
 export default function GrowthJourney() {
-  const experiences = [
-    {
-      title: 'Full Stack Developer',
-      company: 'Axemata Modas',
-      period: 'July 2026 – Present',
-      type: 'Full-Time',
-      bullets: [
-        'Built scalable full-stack web applications using MERN stack & modern cloud architecture.',
-        'Engineered responsive UIs, optimized API endpoints, and integrated database schema designs.',
-      ],
-    },
-    {
-      title: 'Frontend Developer Intern',
-      company: 'Neximprove',
-      period: 'January 2026 – July 2026',
-      type: 'Professional Experience',
-      certificateUrl: 'https://drive.google.com/file/d/1573CNFDEyrAhnZKRcAMIuUUnu0Fe5pDC/view?usp=sharing',
-      bullets: [
-        'Built reusable React.js, TypeScript, and Tailwind CSS components with REST API integration.',
-        'Refactored components, fixed cross-browser issues, and collaborated in an Agile team.',
-      ],
-    },
-    {
-      title: 'Open Source Contributor',
-      company: 'GirlScript Summer of Code (GSSoC) 2026',
-      period: 'May 2026 – 15 August 2026',
-      type: 'Open Source Experience',
-      link: 'https://gssoc-tracker.vercel.app/pr-tracker/24-Harshdeep',
-      bullets: [
-        'Contributed to the CommitPulse project, focusing on frontend improvements.',
-        'Implemented frontend localization for multilingual support.',
-      ],
-    },
-  ]
+  const containerRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start 75%', 'end 50%'],
+  })
 
-  const stats = [
-    { icon: '💻', number: 3, label: 'Featured Projects' },
-    { icon: '🧩', number: 407, label: 'Year Contributions', suffix: '+' },
-    { icon: '🚀', number: 10, label: 'Technologies Mastered' },
-    { icon: '📈', number: 6, label: 'Months Experience', suffix: '+' },
-    { icon: '📚', number: 4, label: 'Certifications' },
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  })
+
+  const timelineEvents = [
+    {
+      year: '2024',
+      title: 'BCA & Development Journey Began',
+      desc: 'Enrolled in Bachelor of Computer Applications (Eternal University). Built foundational projects including ZaikaHub (React recipe platform) and Adaptive Chatbot (Node/Express/MongoDB session management).',
+    },
+    {
+      year: '2025',
+      title: 'Full-Stack Expansion & Advanced MERN',
+      desc: 'Mastered REST API architecture, database schema design, state management in React, and modern TypeScript workflows.',
+    },
+    {
+      year: '2026',
+      title: 'Neximprove — Frontend Developer Intern',
+      desc: 'Joined Neximprove as a Frontend Developer Intern (Jan 2026 – Jul 2026). Worked inside SaaS codebase across Sales UI, Broker Portal, Pricing Pages, Onboarding, Learning Portal, and Customer 360.',
+    },
+    {
+      year: '2026',
+      title: 'Axemata Modas — Web Developer / Full Stack Intern',
+      desc: 'Engineered full-stack e-commerce architecture integrating customer storefront, Express/Node REST APIs, MongoDB models, and admin workflow control panels.',
+    },
+    {
+      year: '2026',
+      title: 'GSSoC 2026 (Global Rank #1,493) & Open Source',
+      desc: 'Completed GirlScript Summer of Code (GSSoC 2026) achieving Global Rank #1,493 as an active open-source contributor to CommitPulse (frontend localization and UI refactoring).',
+    },
+    {
+      year: 'NOW',
+      title: 'Building & Seeking Full Stack, AI/ML & Software Engineer Roles',
+      desc: 'Actively exploring Full Stack, Software Engineering, and AI/ML Developer roles while building autonomous AI Agents, LLM tools, and web applications.',
+    },
   ]
 
   return (
-    <section id="journey" className="growth-journey">
-      <div className="container section-center">
-        <Motion.h2 
-          className="section-title"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          Professional Experience & Growth
-        </Motion.h2>
+    <section id="journey" className="journey-section">
+      <div className="container">
+        <span className="section-label">Growth & Milestones</span>
+        <h2 className="section-title">Development Journey</h2>
         <p className="section-subtitle">
-          My career journey, open source contributions, and key achievements
+          A continuous timeline of software engineering progression, real product internships, and open-source contributions.
         </p>
 
-        <div className="experience-cards" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '900px', margin: '2.5rem auto' }}>
-          {experiences.map((exp, index) => (
-            <Motion.div
-              key={exp.company}
-              className="cert-card"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              style={{ textAlign: 'left', borderTop: '4px solid var(--blue-primary)' }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                <div>
-                  <h3 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--text-primary)' }}>{exp.title}</h3>
-                  <p style={{ margin: '0.25rem 0 0', fontWeight: 600, color: 'var(--blue-primary)' }}>{exp.company}</p>
-                </div>
-                <span className="tech-tag" style={{ fontSize: '0.85rem' }}>{exp.period}</span>
-              </div>
-              <ul style={{ margin: '0.75rem 0 0 1.25rem', padding: 0, color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>
-                {exp.bullets.map((bullet, idx) => (
-                  <li key={idx} style={{ marginBottom: '0.35rem' }}>{bullet}</li>
-                ))}
-              </ul>
-              {exp.certificateUrl && (
-                <div style={{ marginTop: '1rem' }}>
-                  <a
-                    href={exp.certificateUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-sm btn-outline"
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', padding: '0.4rem 0.9rem' }}
-                  >
-                    View Internship Certificate <FiExternalLink size={14} />
-                  </a>
-                </div>
-              )}
-              {exp.link && (
-                <div style={{ marginTop: '1rem' }}>
-                  <a
-                    href={exp.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-sm btn-outline"
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', padding: '0.4rem 0.9rem' }}
-                  >
-                    View GSSoC PR Tracker <FiExternalLink size={14} />
-                  </a>
-                </div>
-              )}
-            </Motion.div>
-          ))}
-        </div>
+        <div className="timeline-container" ref={containerRef}>
+          {/* Static high-contrast background guide line */}
+          <div className="timeline-guide-line" />
 
-        <div className="journey-stats">
-          {stats.map((stat, index) => (
-            <Motion.div 
-              key={stat.label} 
-              className="stat-card"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
+          {/* Glowing active progress line animated with scroll */}
+          <motion.div
+            className="timeline-progress-line"
+            style={{ scaleY, originY: 0 }}
+          />
+
+          {timelineEvents.map((item, idx) => (
+            <motion.div
+              key={idx}
+              className="timeline-item"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.5, delay: idx * 0.08 }}
             >
-              <div className="stat-icon">{stat.icon}</div>
-              <div className="stat-number">
-                <AnimatedCounter end={stat.number} />
-                {stat.suffix || ''}
-              </div>
-              <div className="stat-label">{stat.label}</div>
-            </Motion.div>
+              <div className="timeline-dot" />
+              <div className="timeline-year">{item.year}</div>
+              <h3 className="timeline-title">{item.title}</h3>
+              <p className="timeline-desc">{item.desc}</p>
+            </motion.div>
           ))}
         </div>
       </div>
