@@ -35,6 +35,20 @@ export default function Experience() {
       ],
       tags: ['Next.js', 'React', 'Node.js', 'Express.js', 'MongoDB', 'REST APIs', 'TypeScript'],
     },
+    {
+      company: 'NavGurukul',
+      role: 'English Language Teacher & IT Facilitator',
+      period: 'Nov 2024 – Aug 2025 (10 mos)',
+      location: 'Eternal University · On-site',
+      type: 'Education & IT Facilitation Internship',
+      certificateUrl: '/image copy.png',
+      description: 'Served as an English Language Teacher and IT Facilitator at Eternal University, leading interactive communication workshops, technical support ticket resolution, and project coordination.',
+      bullets: [
+        'English Language Teacher (Mar 2025 – Aug 2025 · 6 mos): Led interactive sessions, hackathons, and collaboration activities to enhance participants’ English proficiency, public speaking confidence, and soft skills.',
+        'IT Facilitator (Nov 2024 – Feb 2025 · 4 mos): Handled issue resolution, support ticket management, and data analysis efficiently while ensuring organized project documentation, problem solving, and task management.',
+      ],
+      tags: ['Communication', 'Activity Planning', 'Problem Solving', 'Time Management', 'IT Support', 'Task Management'],
+    },
   ]
 
   return (

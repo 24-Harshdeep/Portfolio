@@ -4,6 +4,12 @@ import { FiExternalLink } from 'react-icons/fi'
 export default function Certifications() {
   const certs = [
     {
+      name: 'English Coordinator & Coach',
+      platform: 'NavGurukul',
+      url: '/image copy.png',
+      note: 'Awarded Certificate of Appreciation for leadership in fostering language proficiency, dedication to peer learning, and coordinating communication activities.',
+    },
+    {
       name: 'Prompt Engineering',
       platform: 'Vanderbilt University',
       url: 'https://www.coursera.org/account/accomplishments/records/XBMTKTPY0OW6',

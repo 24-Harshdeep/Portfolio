@@ -21,6 +21,11 @@ export default function GrowthJourney() {
       desc: 'Enrolled in Bachelor of Computer Applications (Eternal University). Built foundational projects including ZaikaHub (React recipe platform) and Adaptive Chatbot (Node/Express/MongoDB session management).',
     },
     {
+      year: '2024–2025',
+      title: 'NavGurukul — IT Facilitator & English Teacher Intern',
+      desc: 'Completed a 10-month on-site internship at Eternal University (Nov 2024 – Aug 2025). Managed IT support ticket resolution, data analysis, hackathons, and interactive communication sessions.',
+    },
+    {
       year: '2025',
       title: 'Full-Stack Expansion & Advanced MERN',
       desc: 'Mastered REST API architecture, database schema design, state management in React, and modern TypeScript workflows.',
