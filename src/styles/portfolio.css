@@ -1344,17 +1344,21 @@ section {
 
 /* Animated Drawing Wave from Left to Right */
 .animated-draw-wave {
-  stroke-dasharray: 2500;
-  stroke-dashoffset: 2500;
-  animation: drawWaveFromLeft 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  stroke-dasharray: 25000;
+  stroke-dashoffset: 25000;
+  animation: drawWaveFromLeft 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes drawWaveFromLeft {
   0% {
-    stroke-dashoffset: 2500;
+    stroke-dashoffset: 25000;
+  }
+  99% {
+    stroke-dashoffset: 0;
   }
   100% {
     stroke-dashoffset: 0;
+    stroke-dasharray: none;
   }
 }
 

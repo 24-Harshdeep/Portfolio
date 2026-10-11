@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
+import { motion } from 'framer-motion'
 import { FiGithub, FiGitCommit, FiStar, FiGitPullRequest, FiCode, FiExternalLink, FiActivity, FiCalendar } from 'react-icons/fi'
 import { useStore } from '../store/useStore'
 import fallbackContributions from '../data/githubContributions.json'
@@ -417,18 +418,19 @@ export default function GitHubActivity({ username = '24-Harshdeep' }) {
                   <line x1="30" y1="140" x2="910" y2="140" stroke="var(--border-color)" strokeWidth="1" strokeDasharray="4 4" />
 
                   {waveformPoints.area && (
-                    <path
+                    <motion.path
                       key={`area-${timeRange}-${viewMode}`}
-                      className="animated-draw-area"
                       d={waveformPoints.area}
                       fill="url(#blueAreaGradient)"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.8, delay: 0.2 }}
                     />
                   )}
 
                   {waveformPoints.path && (
-                    <path
+                    <motion.path
                       key={`line-${timeRange}-${viewMode}`}
-                      className="animated-draw-wave"
                       d={waveformPoints.path}
                       fill="none"
                       stroke="var(--accent-cyan)"
@@ -436,6 +438,9 @@ export default function GitHubActivity({ username = '24-Harshdeep' }) {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       filter="url(#blueGlowFilter)"
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
                     />
                   )}
 
